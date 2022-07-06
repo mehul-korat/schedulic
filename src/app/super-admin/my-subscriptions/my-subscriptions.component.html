@@ -1,0 +1,80 @@
+<div class="container-height" id="my-subscriptions" style="margin-top: 70px;">
+    <div class="loader-main" *ngIf="isLoaderAdmin"><img src="../../../assets/images/sc-loader.svg" /></div>
+    <div class="row mx-0">
+        <div class="col-12 px-0">
+            <div class="pendingnotes d-flex">
+                <label class="tab-label">My Subscription</label>
+                <div class="single-search-bar">
+                    <i class="fa fa-search"></i>
+                    <input type="text" placeholder="Search">
+                </div>
+                <button (click)="fnAddNewPlan()" mat-button class="add-sub-btn">Add New Subscription</button>
+            </div>
+            <div class="col-12" id="">
+                <div class="w-100" id="">
+                    <div class="table-background">
+                        <div class="Pending-table">
+                            <div class="main-table-content main-cust-table-content">
+                                <div class="content" class="admin-list">
+                                    <div class="subscription-list-details" *ngFor="let subscriptionList of subscriptionList; let i=index;">
+                                        <div class="text-left" fxFlex="20">
+                                            <label class="label">Subscription Name</label>
+                                            <p class="mb-0 text-capitalize" *ngIf="subscriptionList.plan_name">{{subscriptionList.plan_name}} (${{subscriptionList.amount}})</p>
+                                            <p class="mb-0 text-capitalize" *ngIf="!subscriptionList.plan_name">--</p>
+                                        </div>
+                                        <div class="text-left" fxFlex="20">
+                                            <label class="label">Time Iterval</label>
+                                            <p class="mb-0" *ngIf="subscriptionList.interval">{{subscriptionList.interval}}</p>
+                                            <p class="mb-0" *ngIf="!subscriptionList.interval">--</p>
+                                        </div>
+                                        <div class="text-left" fxFlex="12">
+                                            <label class="label">No Of Business</label>
+                                            <p class="mb-0" *ngIf="subscriptionList.business_limit">{{subscriptionList.business_limit}}</p>
+                                            <p class="mb-0" *ngIf="!subscriptionList.business_limit">--</p>
+                                        </div>
+                                        <div class="text-left" fxFlex="12">
+                                            <label class="label">No Of Staff</label>
+                                            <p class="mb-0" *ngIf="subscriptionList.staff_limit">{{subscriptionList.staff_limit}}</p>
+                                            <p class="mb-0" *ngIf="!subscriptionList.staff_limit">--</p>
+                                        </div>
+                                        <div class="text-left" fxFlex="12">
+                                            <label class="label">No Of Customers</label>
+                                            <p class="mb-0" *ngIf="subscriptionList.customer_limit">{{subscriptionList.customer_limit}}</p>
+                                            <p class="mb-0" *ngIf="!subscriptionList.customer_limit">--</p>
+                                        </div>
+                                        <div class="text-left" fxFlex="12">
+                                            <label class="label">No Of Services</label>
+                                            <p class="mb-0" *ngIf="subscriptionList.service_limit">{{subscriptionList.service_limit}}</p>
+                                            <p class="mb-0" *ngIf="!subscriptionList.service_limit">--</p>
+                                        </div>
+                                        <div class="text-left" fxFlex="12">
+                                            <div>
+                                                <button (click)="fnDeletePlan(subscriptionList.plan_id)" mat-fab class="delete-btn" aria-label="Example icon button with a delete icon">
+                                                    <mat-icon>delete</mat-icon>
+                                                  </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- <div class="table_pagination">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-end">
+                                    <li class="page-item{{current_page_subscriptionList==1?'pointernone':'' }}" (click)="navigateTo_subscriptionList(first_page_url_subscriptionList)"><a class="page-link"><i class="fa fa-angle-double-left arrow-icon" aria-hidden="true"></i></a></li>
+                                    <li class="page-item" (click)="navigateTo_subscriptionList(prev_page_url_subscriptionList)"><a class="page-link"><i class="fa fa-angle-left arrow-icon" aria-hidden="true"></i></a></li>
+                                    <li class="page-item" [ngClass]="{'active':current_page_subscriptionList == i+1}" *ngFor="let pagenumber of arrayOne_subscriptionList(last_page_subscriptionList); let i = index;" (click)="navigateToPageNumber_subscriptionList(i+1)"><a class="page-link">{{i+1}}</a></li>
+                                    <li class="page-item" (click)="navigateTo_subscriptionList(next_page_url_subscriptionList)"><a class="page-link"><i class="fa fa-angle-right arrow-icon" aria-hidden="true"></i></a></li>
+                                    <li class="page-item {{arrayOne_subscriptionList(last_page_subscriptionList).length==current_page_subscriptionList?'pointernone':''}}" (click)="navigateTo_subscriptionList(last_page_url_subscriptionList)"><a class="page-link"><i class="fa fa-angle-double-right arrow-icon" aria-hidden="true"></i></a></li>
+                                </ul>
+                            </nav>
+                        </div> -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

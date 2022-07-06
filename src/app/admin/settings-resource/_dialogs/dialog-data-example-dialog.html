@@ -1,0 +1,11 @@
+<div *ngIf="staffList != ''" class="select_staff_list">
+    <div class="drageble-box" *ngFor="let staffList of staffList" fxLayout="row">
+        <div class="" fxFlex="90">
+            <mat-checkbox (change)="fnAssignStaffToService($event.checked, staffList.id)" [checked]="assignStaffArr.indexOf(staffList.id) > -1">
+                {{staffList.firstname}} {{staffList.lastname}}</mat-checkbox>
+        </div>
+        <!-- <div class="" fxFlex="10"> <i class="material-icons minus-icon pointer" >remove_circle_outline</i></div> -->
+    </div>
+    <button mat-buton>Save</button>
+</div>
+<h3 *ngIf="staffList == ''">No Staff Found</h3>

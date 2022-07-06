@@ -1,0 +1,220 @@
+<div class="loader-main" *ngIf="isLoader">
+    <img src="../../../assets/images/sc-loader.svg" />
+</div>
+<div class="content-main">
+    <mat-tab-group (selectedIndexChange)="fnTabValue($event)" mat-align-tabs="start">
+        <mat-tab label="New" class="appointmentlabel">
+            <div class="bookings-details-main row mx-0" *ngIf="newAppointmentData != ''">
+                <div *ngFor="let newAppointmentData of newAppointmentData; let i=index" class="col-sm-6 col-md-6 col-12 col-lg-4 single-booking float-left">
+                    <mat-card class="col card mt-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6 col-lg-6 col-sm-3 col-md-6 mb-2">
+                                    <label class="d-block custom-font-weight">Date & Time</label>
+                                    <p>{{newAppointmentData.booking_dateForLabel}}</p>
+                                    <p>{{newAppointmentData.booking_timeForLabel}}</p>
+                                </div>
+                                <div class="col-6 col-sm-3 col-md-6 col-lg-6 text-right">
+                                    <label class="font-weight-bold">Order Id</label>
+                                    <p>{{newAppointmentData.id}}</p>
+                                    <label class="font-weight-bold mt-2">Status</label>
+                                    <p *ngIf="newAppointmentData.order_status == 'P'">Waiting For Confirmation</p>
+                                    <p *ngIf="newAppointmentData.order_status == 'CNF'">Confirm</p>
+                                    <p *ngIf="newAppointmentData.order_status == 'RSC'">Reschedule By Customer</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 col-sm-3 col-md-6 col-lg-8">
+                                    <label class="custom-font-weight">Service</label>
+                                    <p>{{newAppointmentData.service?newAppointmentData.service.service_name:'-'}}</p>
+                                    <p class="mb-2">Duration: {{newAppointmentData.service?newAppointmentData.service.service_time:'-'}} Min
+                                    </p>
+                                    <label class="custom-font-weight">Amount</label>
+                                    <p *ngIf="currencySymbolPosition=='left'">{{currencySymbol| currencySymbol:'wide'}} {{ newAppointmentData.service_cost | currency:selectedCurrency:'':'1.2-2':currencySymbolFormat }}</p>
+                                    <p *ngIf="currencySymbolPosition=='right'">{{ newAppointmentData.service_cost | currency:selectedCurrency:'':'1.2-2':currencySymbolFormat }} {{currencySymbol| currencySymbol:'wide'}}
+                                    </p>
+                                    <label class="custom-font-weight mt-2 ">Customer</label>
+                                    <p class="text-capitalize">
+                                        {{newAppointmentData.customer?newAppointmentData.customer.fullname:''}}</p>
+                                    <p class="text-capitalize">Phone No:{{newAppointmentData.customer?newAppointmentData.customer.phone:''}}
+                                    </p>
+                                </div>
+
+                                <div class="col-6 col-sm-3 col-md-6 col-lg-4 buttons pt-4">
+                                    <button mat-button class="d-block details-btn" (click)="StaffMyAppointmentDetails(i)">Details</button>
+                                    <button mat-button class="d-block cancel-btn" (click)="changeBookingStatus(newAppointmentData.id, 'R',i)">Reject</button>
+                                    <button mat-button (click)="changeBookingStatus(newAppointmentData.id, 'AC',i)" class="d-block pay-btn">Accept</button>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+
+            <div class="no-booking-data 1" *ngIf="newAppointmentData ==''">
+                <div class="no-data-badge">
+                    <img src="/assets/images/nodata.svg" />
+                    <label>No Data Found.</label>
+                </div>
+            </div>
+        </mat-tab>
+
+
+        <mat-tab label="Ongoing" class="appointmentlabel">
+            <div *ngIf="onGoingAppointmentData != ''" class="bookings-details-main row mx-0">
+                <div *ngFor="let onGoingAppointmentData of onGoingAppointmentData; let i=index" class="col-sm-6 col-md-6 col-lg-4 single-booking float-left">
+                    <mat-card class="col card mt-3 ">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6 col-lg-6 col-sm-3 col-md-6">
+                                    <label class="d-block custom-font-weight">Date & Time</label>
+                                    <p>{{onGoingAppointmentData.booking_dateForLabel}}</p>
+                                    <p>{{onGoingAppointmentData.booking_timeForLabel}}</p>
+                                </div>
+                                <div class="col-6 col-sm-3 col-md-6 col-lg-6  text-right">
+                                    
+                                    <label class="font-weight-bold">Order Id</label>
+                                    <p>{{onGoingAppointmentData.id}}</p>
+                                    <form class="common-input mt-2">
+                                        <div class="form-group"> 
+                                            <!-- <mat-form-field class=" bottom-border-field"> -->
+                                            <!-- <mat-label>Change Status</mat-label> -->
+                                            <mat-select name="status" class="form-control formcontrol custom-select-modal-wrap " placeholder="Change Status"  [(value)]="onGoingAppointmentData.order_status" (selectionChange)="someMethod(onGoingAppointmentData.id, $event.value)">
+                                                <mat-option [disabled]="(onGoingAppointmentData.timeToServiceDecimal > 60) || onGoingAppointmentData.service.service_sub_type == 'in_store' || onGoingAppointmentData.order_status == 'WS'" value="OW">On The Way</mat-option>
+                                                <mat-option [disabled]="onGoingAppointmentData.timeToServiceDecimal > 30" value="WS">Work Started</mat-option>
+                                                <mat-option [disabled]="onGoingAppointmentData.order_status == 'WS'" value="GL">Getting Late</mat-option>
+                                            </mat-select>
+                                            <!-- </mat-form-field> -->
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-6 col-sm-3 col-md-6 col-lg-6">
+                                    <label class="custom-font-weight">Service</label>
+                                    <p>{{onGoingAppointmentData.service?onGoingAppointmentData.service.service_name:''}}
+                                    </p>
+                                    <p>Duration: {{onGoingAppointmentData.service?onGoingAppointmentData.service.service_time:'-'}} Min
+                                    </p>
+                                    <label class="custom-font-weight mt-2">Amount</label>
+                                    <!-- <p>$ {{onGoingAppointmentData.service.service_cost}}</p> -->
+                                    <p *ngIf="currencySymbolPosition=='left'">{{currencySymbol| currencySymbol:'wide'}} {{ onGoingAppointmentData.service_cost | currency:selectedCurrency:'':'1.2-2':currencySymbolFormat }}</p>
+                                    <p *ngIf="currencySymbolPosition=='right'">{{ onGoingAppointmentData.service_cost | currency:selectedCurrency:'':'1.2-2':currencySymbolFormat }} {{currencySymbol| currencySymbol:'wide'}}
+                                    </p>
+                                    <label class="custom-font-weight mt-2">Customer</label>
+                                    <p class="text-capitalize">
+                                        {{onGoingAppointmentData.customer?onGoingAppointmentData.customer.fullname:''}}
+                                    </p>
+                                    <p class="text-capitalize">Phone No:{{onGoingAppointmentData.customer?onGoingAppointmentData.customer.phone:''}}
+                                    </p>
+                                </div>
+                                <div class="col-6 col-sm-3 col-md-6 col-lg-6 text-right">
+                                    <label class="custom-font-weight mt-2">Current Status</label>
+                                    <p class="text-capitalize" *ngIf="onGoingAppointmentData.order_status == 'P'">
+                                        Waiting For Confirmation</p>
+                                    <p class="text-capitalize" *ngIf="onGoingAppointmentData.order_status == 'AC'">
+                                        Confirm</p>
+                                    <p class="text-capitalize" *ngIf="onGoingAppointmentData.order_status == 'RSA'">
+                                        Rescheduled By Admin</p>
+                                    <p class="text-capitalize" *ngIf="onGoingAppointmentData.order_status == 'RSS'">
+                                        Rescheduled</p>
+                                    <p class="text-capitalize" *ngIf="onGoingAppointmentData.order_status == 'RSC'">
+                                        Rescheduled By Customer</p>
+                                    <p class="text-capitalize" *ngIf="onGoingAppointmentData.order_status == 'R'">
+                                        Rejected</p>
+                                    <p class="text-capitalize" *ngIf="onGoingAppointmentData.order_status == 'OW'">On The Way</p>
+                                    <p class="text-capitalize" *ngIf="onGoingAppointmentData.order_status == 'WS'">Work Started
+                                    </p>
+                                    <p class="text-capitalize" *ngIf="onGoingAppointmentData.order_status == 'GL'">Getting Late
+                                    </p>
+                                    <p class="text-capitalize" *ngIf="onGoingAppointmentData.order_status == 'ITR'">
+                                        Interrupted</p>
+                                    <div class="buttons pt-3">
+                                        <button mat-button class="d-block details-btn" (click)="OnGoingAppointmentDetails(i)">Details</button>
+                                        <button mat-button class="d-block reschedulebtn" (click)="rescheduleAppointment(i)" *ngIf="minReschedulingTime && onGoingAppointmentData.booking_date_time && minReschedulingTime.getTime() < onGoingAppointmentData.booking_date_time.getTime()">Reschedule</button>
+                                        <button mat-button class="d-block complete-btn" (click)="changeBookingStatus(onGoingAppointmentData.id, 'CO', i)">Complete</button>
+                                     </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+
+            </div>
+            <div class="no-booking-data 2" *ngIf="onGoingAppointmentData ==''">
+                <div class="no-data-badge">
+                    <img src="/assets/images/nodata.svg" />
+                    <label>No Data Found.</label>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Completed" class="appointmentlabel">
+            <div class="bookings-details-main row mx-0" *ngIf="completedAppointmentData != ''">
+                <div *ngFor="let completedAppointmentData of completedAppointmentData; let i=index" class="col-sm-6 col-md-6 col-lg-4 single-booking float-left">
+                    <mat-card class="col card mt-3 ">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6 col-lg-6 col-sm-3 col-md-6 mb-2">
+                                    <label class="d-block custom-font-weight">Date & Time</label>
+                                    <p>{{completedAppointmentData.booking_dateForLabel}}</p>
+                                    <p>{{completedAppointmentData.booking_timeForLabel}}</p>
+                                </div>
+                                <div class="col-6 col-sm-3 col-md-6 col-lg-6 text-right">
+                                    <label class="font-weight-bold">Order Id</label>
+                                    <p>{{completedAppointmentData.id}}</p>
+                                    <label class="font-weight-bold mt-2">Status</label>
+                                    <p>Completed</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 col-sm-3 col-md-6 col-lg-8">
+                                    <label class="custom-font-weight">Service</label>
+                                    <p>{{completedAppointmentData.service?completedAppointmentData.service.service_name:'-'}}
+                                    </p>
+                                    <p>Duration: {{completedAppointmentData.service?completedAppointmentData.service.service_time:'-'}} Min
+                                    </p>
+                                    <label class="custom-font-weight mt-2">Amount</label>
+                                    <!-- <p>$ {{completedAppointmentData.service.service_cost}}</p> -->
+                                    <p *ngIf="currencySymbolPosition=='left'">{{currencySymbol| currencySymbol:'wide'}} {{ completedAppointmentData.service_cost | currency:selectedCurrency:'':'1.2-2':currencySymbolFormat }}</p>
+                                    <p *ngIf="currencySymbolPosition=='right'">{{ completedAppointmentData.service_cost | currency:selectedCurrency:'':'1.2-2':currencySymbolFormat }} {{currencySymbol| currencySymbol:'wide'}}
+                                    </p>
+                                    <label class="custom-font-weight mt-2">Customer</label>
+                                    <p class="text-capitalize">
+                                        {{completedAppointmentData.customer?completedAppointmentData.customer.fullname:''}}
+                                    </p>
+                                    <p class="text-capitalize">Phone No:{{completedAppointmentData.customer?completedAppointmentData.customer.phone:''}}
+                                    </p>
+                                </div>
+
+                                <div class="col-6 col-sm-3 col-md-6 col-lg-4 buttons mt-0">
+                                    <button mat-button class="d-block details-btn" (click)="CompleteAppointmentDetails(i)">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+
+            </div>
+            <div class="no-booking-data 3" *ngIf="completedAppointmentData ==''">
+                <div class="no-data-badge">
+                    <img src="/assets/images/nodata.svg" />
+                    <label>No Data Found.</label>
+                </div>
+            </div>
+        </mat-tab>
+
+    </mat-tab-group>
+    <form class="form-inline" id="search_container_staffappo">
+        <div class="search-input-container">
+            <i class="fa fa-search before-search"></i>
+            <input name="searchKeyword" [(ngModel)]="search.keyword" (keyup)="staffSearchAppointment()" class="form-control searchbox_staffappo" type="text" placeholder="Search Appointment">
+        </div>
+        <button type="button" class="btn btn-primary btnappoint_staffappo" (click)="AddAppointment()">Add
+            Appointment</button>
+
+    </form>
+
+
+</div>

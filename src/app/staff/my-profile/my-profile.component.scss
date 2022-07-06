@@ -1,0 +1,182 @@
+@import "variables";
+.profile-main {
+    margin-top: 65px;
+    height: 90vh;
+    .title {
+        font-size: $fs-16;
+    }
+    .img-upload-btns{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-left: 40px;
+    }
+}
+
+.card {
+    margin-top: 8px;
+    margin-left: 5px;
+    .input-group-text {
+        background-color: white;
+        padding: 6px;
+    }
+}
+
+.details {
+    margin-top: 12px;
+    border-radius: 25px;
+    width: 100px;
+}
+
+.toggleborder {
+    border: 0;
+}
+.change-password-container{
+    background-color: #FFF1C0;
+    padding-top: 45px;
+    .main-heading{
+       
+        font-size: 16px;
+        padding: 0px 16px;
+    }
+    .form-group{
+        .form-control{
+            background-color: #fff;
+            border-radius: 5px;
+            border: 0;
+            padding: 15px 10px;
+            font-size: 14px;
+            line-height: 1;
+            height: 40px;
+            
+        }
+        
+    }
+    .mat-icon-button{
+        color: #565657;
+        /* font-size: 27px; */
+        position: absolute;
+        right: 15px;
+        background-color: #fff;
+        border-radius: 0px;
+        height: 36px;
+        z-index: 99999;
+        .material-icons{
+            font-size: 18px;
+            /* position: absolute; */
+        }
+    }
+}
+.d-block {
+    margin-top: 10px;
+    // border-radius: 25px;
+    // width: 130px;
+    float: right;
+}
+
+
+.user-btn {
+    float: right;
+    width: 100px;
+    margin: 4px;
+}
+
+i {
+    font-size: $fs-24;
+    width: 25px;
+    text-align: center;
+}
+
+.form-control {
+    height: 40px;
+}
+
+.upload-profile-img {
+    float: right;
+    border-radius: 100%;
+    height: 120px;
+    width: 120px;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .card {
+        width: 717px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .card {
+        width: 717px;
+    }
+}
+
+/* Image Upload Dialog */
+
+ ::ng-deep .modal-info {
+    margin: 0 !important;
+    .modal-bcolor-primary {
+        background-color: #d9f0fe;
+        .header-margins {
+            padding: 0;
+        }
+    }
+     ::ng-deep .modal-body {
+        .work-content {
+            text-align: center;
+            padding-left: 10px;
+            .form-control {
+                padding-bottom: 11px;
+                padding-top: 11px;
+                height: 31px;
+            }
+        }
+    }
+}
+
+ ::ng-deep .mat-dialog-container {
+    padding: 0 !important;
+}
+
+::ng-deep .bottom-border-field{
+    .mat-form-field-suffix{
+        .mat-icon{
+            border-right: 0;
+        }
+    }
+}
+
+::ng-deep .upload-preview-img {
+    max-width: 200px;
+    margin: 0 auto;
+    display: table;
+}
+
+
+.user-image-upload{
+    display: flex;
+       .profile-img-wrap{
+           width: 150px;
+           height: 150px;
+           background-color: #EAF7F6;
+           justify-content: center;
+        //    margin-right: 40px;
+           overflow: hidden;
+           border-radius: 5px; 
+           .default-img{
+               width: 40px;
+           }
+           .service-profile-image {
+               // width: 100%;
+               // height: 100%;
+           }
+       }
+       .img-upload-btns{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+       }
+   }

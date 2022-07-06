@@ -1,0 +1,56 @@
+<mat-drawer-content>
+    <div class=" subscription-title py-3 font-weight-bold col-12 text-center">
+        Subscription Plan
+    </div>
+
+
+    <div class=" mt-5 plan-content p-2">
+        <div class="row">
+            <div class="col-4 p-3 text-center" *ngFor="let planList of planList; let i=index;">
+                <div class="border shadow">
+                    <div class="plan-name py-2 text-center text-capitalize font-weight-bold">
+                        {{planList.plan_name}}
+                    </div>
+                    <hr class="m-0">
+                    <div class="plan-cost py-2 text-center">
+                        <i class="fa  fa-usd pr-2"></i> <span class="cost pr-2">{{planList.amount}}/-</span> <span>per {{planList.interval}}</span>
+                    </div>
+                    <!-- <hr class="m-0"> -->
+                    <div class="paln-business-staff p-2">
+                        <div class="row">
+                            <div class="col-6">
+                                <i class="fa fa-briefcase pr-2"></i><span>Business</span>
+                                <p *ngIf="planList.business_limit" class="font-weight-bold">{{planList.business_limit}}</p>
+                                <p *ngIf="!planList.business_limit" class="font-weight-bold">--</p>
+                            </div>
+                            <div class="col-6">
+                                <i class="fa fa-id-card pr-2"></i> <span>Staff</span>
+                                <p *ngIf="planList.staff_limit" class="font-weight-bold">{{planList.staff_limit}}</p>
+                                <p *ngIf="!planList.staff_limit" class="font-weight-bold">--</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <hr class="m-0"> -->
+                    <div class="paln-business-staff p-2">
+                        <div class="row">
+                            <div class="col-6">
+                                <i class="fa fa-users pr-2"></i> <span>Customers</span>
+                                <p *ngIf="planList.customer_limit" class="font-weight-bold">{{planList.customer_limit}}</p>
+                                <p *ngIf="!planList.customer_limit" class="font-weight-bold">--</p>
+                            </div>
+                            <div class="col-6">
+                                <i class="fa fa-bookmark pr-2"></i> <span>Services</span>
+                                <p *ngIf="planList.service_limit" class="font-weight-bold">{{planList.service_limit}}</p>
+                                <p *ngIf="!planList.service_limit" class="font-weight-bold">--</p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="m-0">
+                    <div class="subscribe-btn text-center py-3">
+                        <button (click)="fnPaymentNow(planList.plan_id)" mat-flat-button color="primary">Subscribe Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-drawer-content>

@@ -1,0 +1,154 @@
+<mat-drawer-content id="paymentgateway" class="ml-0">
+    <div class="loader-main" *ngIf="isLoaderAdmin"><img src="../../../assets/images/sc-loader.svg" /></div>
+    <div class="left-side-menu setting-menu" [ngClass]="{ 'short-menu': settingSideMenuToggle === true }">
+        <div class="leftarrow-icon d-flex align-items-center">
+            <h6 class="mb-0">Resource Management</h6>
+            <span (click)="fnSettingMenuToggleSmall()" *ngIf="!settingSideMenuToggle" class="customer-drawer-leftarrow ml-auto pointer material-icons-outlined">arrow_circle_left</span>
+            <span (click)="fnSettingMenuToggleLarge()" *ngIf="settingSideMenuToggle" class="customer-drawer-leftarrow ml-auto pointer material-icons-outlined">arrow_circle_right</span>
+        </div>
+        <div routerLink="/admin/settings-resource" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/service.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/service-active.svg" />
+            </div>
+            <p>Services</p>
+        </div>
+        <div routerLink="/admin/settings-resource/staff" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/staff.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/staff-active.svg" />
+            </div>
+            <p>Staff</p>
+        </div>
+        <div routerLink="/admin/settings-resource/business-hours" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/business-hours.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/business-hours-active.svg" />
+            </div>
+            <p>Business Hours</p>
+        </div>
+        <div routerLink="/admin/settings-resource/postalcode" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/postal-code.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/postal-code-active.svg" />
+            </div>
+            <p>Postal Codes</p>
+        </div>
+        <h6 class="pt-3">Account</h6>
+        <div routerLink="/admin/settings-account/company-details" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/business-detail.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/business-detail-active.svg" />
+            </div>
+            <p>Business Details</p>
+        </div>
+        <h6 class="pt-3">Payment</h6>
+        <div routerLink="/admin/settings-payment/billing" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/billing.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/billing-active.svg" />
+            </div>
+            <p>Billing</p>
+        </div>
+        <div routerLink="/admin/settings-payment/payment-gateway" class="d-flex setting-menu-item setting-menu-active">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/payment-gateway.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/payment-gateway-active.svg" />
+            </div>
+            <p>Payment Gateway</p>
+        </div>
+        <div routerLink="/admin/settings-payment/payment-rules" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/payment-rules.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/payment-rules-active.svg" />
+            </div>
+            <p>Payment Rules</p>
+        </div>
+        <h6 class="pt-3">General Setting</h6>
+        <div routerLink="/admin/settings-general/appearance" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/appearance.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/appearance-active.svg" />
+            </div>
+            <p>Appearance</p>
+        </div>
+        <div routerLink="/admin/settings-general/booking-rules" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/booking-rules.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/booking-rules-active.svg" />
+            </div>
+            <p>Booking Rules</p>
+        </div>
+        <div routerLink="/admin/settings-general/alert-rules" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/alert-rules.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/alert-rules-active.svg" />
+            </div>
+            <p>Alert Rules</p>
+        </div>
+    </div>
+    <div class="setting-right-side-content without-footer" [ngClass]="{ 'short-content-area': settingSideMenuToggle === true }">
+        <div class="payment-gateways">
+            <h5 class="page-title">Payment Gateways</h5>
+            <p class="page-des">Choose from our list of payment gateways and offer them to your customers to make payments</p>
+            <div class="row mx-0">
+                <div *ngFor="let gateway of gatewayList; let i=index;" class="col-md-6 col-sm-12">
+                    <form #gatewayFrom="ngForm" (submit)="onSubmitPaymentGateway(gatewayFrom,gateway.gateway_type,gateway.is_default?gateway.is_default:0,gateway.payment_code ? gateway.payment_code : '' )">
+                        <mat-accordion>
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        <div class="row w-100 align-items-center no-gutters justify-content-between">
+                                            <div class="col-6">
+                                                <div class="w-100"><img src="/assets/images/payement-gateways/{{gateway.gateway_type}}.png" class="img-fluid d-block payment-image"></div>
+                                                <p class="mb-0   gm-font-14 text-left payment-name text-muted">{{gateway?.name}} </p>
+                                            </div>
+                                            <div class="col-6 align-items-center no-gutters row">
+                                                <div class="col-12 custom-btn-payment-wrap">
+                                                    <div class="pull-right mb-1" *ngIf="gateway.payment_code">
+                                                        <mat-slide-toggle class="" [checked]="gateway.status == 'active'" (change)="ChangePaymentStatus(gateway.payment_code,gateway.gateway_type,$event.checked)"></mat-slide-toggle>
+                                                    </div>
+                                                    <div class="" *ngIf="gateway.payment_code">
+                                                        <button type="button" class="btn make-default-btn px-4 gm-font-12" [ngClass]="gateway.is_default? 'btn-kc-yellow' : 'border-0 gm-btn-kc-yellow'" [disabled]="gateway.is_default" (click)="SetDefault(gateway.payment_code,gateway.gateway_type)">{{gateway.is_default?"Default":"Make As Default"}}</button>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 no-gutters row justify-content-end">
+                                                
+                                                    <div class="ml-3 align-items-center payment-expand-icon d-flex gm-acc-icon gm-lightblue-bg justify-content-center" id="kc-acc-icon-{{gateway.gateway_type}}"><svg viewBox="0 0 448 512" width="15px" height="15px" class="svg-inline--fa fa-chevron-right fa-w-8 fa-2x"><path fill="#2A4797" d="M441.9 167.3l-19.8-19.8c-4.7-4.7-12.3-4.7-17 0L224 328.2 42.9 147.5c-4.7-4.7-12.3-4.7-17 0L6.1 167.3c-4.7 4.7-4.7 12.3 0 17l209.4 209.4c4.7 4.7 12.3 4.7 17 0l209.4-209.4c4.7-4.7 4.7-12.3 0-17z" class=""></path></svg></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </mat-panel-title>
+                                    <mat-panel-description>
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <div class="top-border">
+            
+                                    <div *ngFor="let field of gateway.field" class="d-flex pt-3 pb-1 common-filed-center">
+                                        <label for="{{field.fieldname}}" class="col-sm-4 col-form-label col-form-label-sm payment-label">{{field.label}}</label>
+                                            <div class="form-group col-sm-8">
+                                                <input id="{{field.fieldname}}" name="{{field.fieldname}}" [(ngModel)]="field.value" class="form-control">
+                                            </div>
+                                    </div>
+            
+                                    <div class="d-flex flex-wrap mt-3 common-filed-center">
+                                        <label class="">Test Mode</label>
+                                        <mat-slide-toggle matTooltip="{{gateway.testMode?'Make Inactive':'Make Active'}}" name="testMode" [checked]="gateway.testMode == 1"  [(ngModel)]="gateway.testMode" class="ml-auto"></mat-slide-toggle>
+                                    </div>
+                                    <div class="">
+                                        <button type="submit"  mat-flat-button class="float-right sc-pink-btn my-3 btn">Save</button>
+                                    </div>
+            
+                                </div>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                       
+                    </form>
+                </div>
+                
+            </div>
+
+        </div>
+
+    </div>
+</mat-drawer-content>

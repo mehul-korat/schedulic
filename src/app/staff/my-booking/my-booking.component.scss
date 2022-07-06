@@ -1,0 +1,475 @@
+@import "variables";
+.content-main {
+    margin-top: 63px;
+    position: relative;
+}
+
+.right-button-wrapp {
+    height: 100%;
+    border-radius: 0;
+    background-color: $bgblue;
+    margin: 0px;
+}
+
+::ng-deep .btnappoint {
+    border-radius: 21px;
+    margin-left: 20px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+::ng-deep .mat-tab-label-container {
+    .mat-tab-list {
+        .mat-tab-labels {
+            background-color: #ffe895!important;
+            height: 55px;
+            align-items: center;
+            .mat-tab-label-active {
+                background-color: #fed74b !important;
+                height: 63px;
+            }
+            .mat-tab-label{
+                opacity: 1;
+                color: #000;
+                font-weight: 600;
+                border-right: 1px solid #fff;
+            }
+        }
+    }
+}
+
+::ng-deep .form-control {
+    padding-bottom: 11px;
+    padding-top: 11px;
+    height: 31px;
+}
+::ng-deep .custom-select-modal-wrap{
+    background-color: #dbf3f1;
+    border: 1px solid #5dc8bf;
+    .mat-select-arrow-wrapper{
+        display: flex;
+        margin-left: 20px;
+    }
+}
+
+/*My Appointments css*/
+
+.bookings-details-main {
+    .single-booking {
+        .card {
+            /*margin: 20px;*/
+            label {
+                margin-bottom: 0;
+            }
+            p {
+                margin-bottom: 0;
+                font-size: 0.9rem;
+                ;
+            }
+            .buttons {
+                margin-left: auto;
+                margin-top: 20px;
+                .details {
+                    padding: 3px 1.75rem;
+                    margin: 5px 0;
+                    width: 140px;
+                    margin-right: 0 !important;
+                    font-weight: 300;
+                    margin-left: auto;
+                    float: right;
+                }
+                .details-btn {
+                    background-color: $btnlightgrey;
+                    //margin: 50px 0;
+                    margin: 6px 0;
+                    float: right;
+                }
+                .reschedule-btn {
+                    background-color: $btnlightblue;
+                    float: right;
+                    margin: 5px 0;
+                }
+                .cancel-btn {
+                    background-color: $btnlightred;
+                    float: right;
+                    margin: 5px 0;
+                }
+                .pay-btn {
+                    background-color: $btnlightgreen;
+                    float: right;
+                    margin: 5px 0;
+                }
+                .invoice-btn {
+                    background-color: $lightbtn;
+                    float: right;
+                    margin: 5px 0;
+                }
+                .rate-btn {
+                    background-color: $btnlightblue;
+                    float: right;
+                    margin: 5px 0;
+                }
+                .invoice-light-btn {
+                    background-color: $fourth;
+                    float: right;
+                    margin: 5px 0;
+                }
+            }
+        }
+    }
+}
+
+::ng-deep .d-block {
+    margin-top: 0 !important;
+    // border-radius: 25px;
+    width: 130px;
+    /*margin: inherit;*/
+}
+
+::ng-deep .footer-content {
+    justify-content: end;
+}
+
+
+/*interrupted dialog css*/
+
+::ng-deep .modal-info {
+    .modal-bcolor-red {
+        background-color: $btnlightred;
+        // padding-bottom: 0px;
+        .header-margins {
+            padding: 0;
+        }
+    }
+     ::ng-deep .modal-body {
+        .interrupted-content {
+            text-align: center;
+            padding-left: 10px;
+        }
+    }
+    /*Payment Module */
+    .paymentmodeimg {
+        width: 100%;
+    }
+    .payment-module-img {
+        margin: 25px;
+    }
+    .pay-radio-content {
+        display: flex;
+        justify-content: space-around;
+        margin: 25px;
+    }
+    .paybtn {
+        border-radius: 20px;
+        margin: auto;
+    }
+    .payment-details {
+        .service {
+            width: 70%;
+            font-size: $fs-16;
+        }
+        .amount {
+            width: 30%;
+            font-size: $fs-16;
+            font-weight: 500;
+        }
+        .payment-service {
+            width: 84%;
+            font-size: $fs-16;
+        }
+        .payment-amount {
+            width: 16%;
+        }
+    }
+    .paymentbtn {
+        margin: 20px;
+        .confirmbtn {
+            margin: 20px;
+            border-radius: 50px;
+            width: 130px;
+        }
+        .cancelbtn {
+            border-radius: 50px;
+            width: 130px;
+        }
+    }
+    .confirmpaymentbtn {
+        width: 75%;
+        border-radius: 3px;
+        margin: auto;
+    }
+     ::ng-deep .modal-info {
+        .modal-bcolor-primary {
+            background-color: #d9f0fe;
+            .header-margins {
+                padding: 0;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 767px) {
+     ::ng-deep .payment-details {
+        .payment-service,
+        .payment-amount,
+        .amount,
+        .service {
+            width: 100% !important;
+        }
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .paymentbtn {
+        .confirmbtn {
+            display: flex;
+        }
+        .cancelbtn {
+            display: flex;
+        }
+    }
+}
+
+
+/*-----------------*/
+
+::ng-deep .addbtnred {
+    background-color: $btnlightred;
+    border-radius: 20px;
+    border-color: $btnlightred;
+    &:hover {
+        background-color: $btnlightred;
+        color: $fourth;
+        border-color: $btnlightred;
+    }
+}
+
+::ng-deep .tp-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: #eee;
+    width: 400px;
+    .rejectbtn {
+        border-radius: 5px;
+        margin: 5px;
+        background-color: #fa8888;
+        color: #000;    
+        border-color: #fa8888;
+    }
+    .acceptbtn {
+        border-radius: 5px;
+        margin: 5px;
+        background-color: #a0da8d;
+        color: #000;
+        border-color: #a0da8d;
+    }
+    .ongoingdetails {
+        .greenfont {
+            color: green;
+            margin: 20px;
+            .repeat {
+                margin: 8px;
+            }
+        }
+    }
+}
+
+::ng-deep .note-add-details {
+    font-size: 15px !important;
+    margin-top: 12px;
+    margin-bottom: 0px;
+    border-bottom: 1px solid #d9f0fe;
+    padding-bottom: 16px;
+    color: #565657;
+    &:last-child{
+        border-bottom: none;
+        margin: 0px;
+        padding: 0px;
+    }
+}
+::ng-deep .activelog-details-main {
+    padding: 14px 18px;
+    .activelog-details {
+        color: #565657;
+        font-size: 15px;
+        margin-bottom: 10px;
+    }
+}
+::ng-deep .common-details-main{
+    .title{
+        color: #565657;
+        font-size: 15px; 
+    }
+}
+::ng-deep .formcontrol {
+    padding-bottom: 5px;
+    padding-top: 5px;
+    height: 38px;
+}
+
+#search_container_staffappo {
+    position: absolute;
+    top: 0px;
+    z-index: 10;
+    right: 50px;
+    height: 63px;
+    z-index: 1;
+    .search-input-container {
+        position: relative;
+        width: 220px;
+        .before-search {
+            position: absolute;
+            line-height: 1.9;
+            left: 0px;
+            color: #222;
+        }
+        .searchbox_staffappo {
+            padding: 8px 20px;
+            border-radius: 0px;
+            font-size: $fs-12;
+            text-indent: 15px;
+            border-bottom: 1px solid #777;
+            border-top: 0px;
+            border-right: 0px;
+            border-left: 0px;
+            background-color: transparent;
+            width: 100%;
+            &::placeholder{
+                color: #000;
+            }
+        }
+    }
+    .btnappoint_staffappo {
+        border-radius: 4px;
+        margin-left: 20px;
+        padding: 8px 20px;
+        font-size: 12px;
+        background-color: #f04589;
+        border: none; 
+    }
+}
+
+@media only screen and(max-width: 767px) {
+    #search_container_staffappo {
+        display: none;
+    }
+}
+
+::ng-deep .booking-detail-main {
+    .compdetailfs {
+        font-size: $fs-14;
+    }
+    .customer-profile-img {
+        border-radius: 100%;
+        height: 50px;
+        width: 50px;
+        background-color: #f04589;
+        color: white;
+        text-align: center;
+        padding: 14px;
+        line-height: 1.5;
+        display: block;
+        margin: 10px;
+    }
+    .address-fontsize {
+        font-size: 13px;
+        margin-bottom: 0px;
+        .bluephone {
+            color: #00a89b;
+           font-size: 15px;
+        }
+        .bluemap {
+            color: #00a89b;
+           font-size: 15px;
+        }
+    }
+    .customer-name {
+        width: calc(100% - 80px);
+    }
+}
+
+.complete-btn {
+    background-color: #FFAF7F;
+    float: right;
+    margin: 5px 0;
+}
+
+.reschedulebtn {
+    background-color: $btnlightblue;
+    float: right;
+    margin: 5px 0;
+}
+
+::ng-deep .promocode-main {
+    position: relative;
+    &.invalid {
+        .coupon-code-submit {
+            background-color: $error;
+        }
+        .coupon-code-input {
+            border-color: $error;
+        }
+    }
+    &.valid {
+        .coupon-code-input {
+            border: 1px dashed #00A89B;
+        }
+        .remove-code {
+            background-color: #00A89B;
+            border: 0;
+            border-radius: 100%;
+            height: 30px;
+            width: 30px;
+            color: $text-bg;
+            text-align: center;
+            position: absolute;
+            line-height: 1;
+            right: 0px;
+            top: -12px;
+            i {
+                font-size: $fs-18;
+                padding: 5px;
+            }
+        }
+    }
+    .coupon-code-input {
+        width: 94%;
+        display: block;
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: 1px solid #e4e3e3;
+        font-size: $fs-20;
+        transition: all 0.3s;
+        float: right;
+        margin-right: 6%;
+        &:focus {
+            box-shadow: $shadow;
+        }
+    }
+    .coupon-code-submit {
+        position: absolute;
+        width: 80px;
+        right: 0;
+        height: auto;
+        padding: 12px 10px;
+        border-radius: 0px 5px 5px 0px;
+        border: 0px;
+        background-color: #00A89B;
+        color: $text-bg;
+        text-align: center;
+        line-height: 1;
+        color: #fff;
+    }
+}
+
+.payment-confirm-btns {
+    justify-content: space-around;
+}
+.no-booking-data{
+    height: calc(100vh - 119px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

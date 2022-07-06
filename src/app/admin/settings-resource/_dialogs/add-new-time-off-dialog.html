@@ -1,0 +1,50 @@
+<div class="modal-dialog modal-notify modal-info" role="document">
+    <div class="modal-content ">
+        <div class="modal-header modal-bcolor-primary">
+            <p class="heading lead mb-0 work-content">Add Holiday</p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onNoClick()">
+                <span aria-hidden="true" class="white-text"><span class="material-icons-outlined">close </span></span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form class="row" [formGroup]="formAddNewTimeOff">
+                <div class="col-12 common-input">
+                    <div class="form-group">
+                        <input class="form-control" placeholder="Vacation, Holidays, & Others" formControlName="description" />
+                    </div>
+                    <span class="error-wrap" *ngIf="formAddNewTimeOff.get('description').touched || formAddNewTimeOff.get('description').dirty">
+                        <small *ngIf="formAddNewTimeOff.get('description').hasError('required')" class="error">Description is required.</small>
+                    </span>
+                </div>
+                <div class="col-6 common-input">
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><img src="/assets/images/icons/date-calendar.svg" /></span>
+                        </div>
+                        <input class="form-control" [min]="minStartDate" [matDatepicker]="startdate" (click)="startdate.open()" formControlName="startDate" (dateChange)="fnDateChange($event)">
+                        <!-- <mat-datepicker-toggle matSuffix [for]="startdate"></mat-datepicker-toggle> -->
+                        <mat-datepicker #startdate></mat-datepicker>
+                    </div>
+                </div>
+                <div class="col-6 common-input">
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><img src="/assets/images/icons/date-calendar.svg" /></span>
+                        </div>
+                        <input class="form-control" matInput [min]="minEndDate" [matDatepicker]="enddate" (click)="enddate.open()" formControlName="endDate">
+                        <!-- <mat-datepicker-toggle matSuffix [for]="enddate"></mat-datepicker-toggle> -->
+                        <mat-datepicker #enddate></mat-datepicker>
+                        <span class="error-wrap" *ngIf="formAddNewTimeOff.get('endDate').touched || formAddNewTimeOff.get('endDate').dirty">
+                            <small *ngIf="formAddNewTimeOff.get('endDate').hasError('required')" class="error">End Date is required.</small>
+                        </span>
+                    </div>
+                   
+                </div>
+               
+            </form>
+            <div>
+                <button class="d-block btn btn-primary addbtn" (click)="fnAddNewTimeOff()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

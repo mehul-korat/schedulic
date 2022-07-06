@@ -1,0 +1,128 @@
+<mat-drawer-content id="settings-my-profile" class="ml-0">
+    <div class="loader-main" *ngIf="isLoaderAdmin"><img src="../../../assets/images/sc-loader.svg" /></div>
+    <mat-card class="m-0 my-profile h-100">
+        <div class="row h-100">
+            <div class="col-lg-6 col-6 col-md-4  main-account-my-profile">
+                <div class="user-image-upload">
+                    <div class="d-flex profile-img-wrap">
+                        <img class="mx-auto default-img" *ngIf="profileDetails && !myProfileImageUrl && (!profileDetails.image || profileDetails.image == 'https://api.schedulic.com/admin-images/default.png')" src="/assets/images/icons/image-placeholder.svg">
+                        <img class="mx-auto service-profile-image uploaded" *ngIf="profileDetails && profileDetails.image && !myProfileImageUrl && profileDetails.image != 'https://api.schedulic.com/admin-images/default.png'" src="{{profileDetails.image}}">
+                        <img class="add-staff mx-auto" *ngIf="myProfileImageUrl" src="{{myProfileImageUrl}}">
+                    </div>
+                    <div class="img-upload-btns">
+                        <button *ngIf="profileDetails && (!profileDetails.image || profileDetails.image == 'https://api.schedulic.com/admin-images/default.png')" class="sc-yellow-btn mb-2" (click)="myProfleImage()" mat-button>Upload Image</button>
+                        <button *ngIf="profileDetails && profileDetails.image && !myProfileImageUrl && profileDetails.image != 'https://api.schedulic.com/admin-images/default.png'" class="sc-yellow-btn mb-2" (click)="myProfleImage()" mat-button>Change Image</button>
+                        <button *ngIf="profileDetails && profileDetails.image && !myProfileImageUrl" class="sc-yellow-btn mb-2" (click)="onRemoveProfile()" mat-button>Remove Image</button>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <form [formGroup]="settingMyProfile">    
+                        <div class="common-input">
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><img src="/assets/images/icons/man.svg" /></span>
+                                </div>
+                                <input type="text" formControlName="first_name" class="form-control" placeholder="Staff First Name">
+                            </div>
+                            <span class="error-wrap d-flex" *ngIf="settingMyProfile.get('first_name').dirty || settingMyProfile.get('first_name').touched">
+                                <small *ngIf="settingMyProfile.get('first_name').hasError('required')" class="error">Firstname is required.</small>
+                                <small *ngIf="settingMyProfile.get('first_name').hasError('maxlength')" class="error">First Name maximum 8 character.</small>
+                                </span>
+                        </div>
+                        <div class="common-input">
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><img src="/assets/images/icons/man.svg" /></span>
+                                </div>
+                                <input type="text" formControlName="last_name" class="form-control" placeholder="Staff Last Name">
+                            </div>
+                            <span class="error-wrap d-flex" *ngIf="settingMyProfile.get('last_name').dirty || settingMyProfile.get('last_name').touched">
+                                <small *ngIf="settingMyProfile.get('last_name').hasError('required')" class="error">Lastname is required.</small>
+                                <small *ngIf="settingMyProfile.get('last_name').hasError('maxlength')" class="error">Last Name maximum 8 character.</small>
+                                </span>
+                        </div>
+                        <div class="common-input">
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><img src="/assets/images/icons/email.svg" /></span>
+                                </div>
+                                <input type="text" formControlName="email" class="form-control" placeholder="Email">
+                            </div>
+                            <span class="error-wrap d-flex" *ngIf="settingMyProfile.get('email').dirty || settingMyProfile.get('email').touched">
+                                <small *ngIf="settingMyProfile.get('email').hasError('required')" class="error">Email is required.</small>
+                                <small *ngIf="settingMyProfile.get('email').hasError('pattern')" class="error">Email is invalid.</small>
+                            </span>
+                        </div>
+                        <div class="common-input">
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><img src="/assets/images/icons/calling.svg" /></span>
+                                </div>
+                                <input type="text" formControlName="mobile" class="form-control" placeholder="Mobile">
+                            </div>
+                            <span class="error-wrap d-flex" *ngIf="settingMyProfile.get('mobile').dirty || settingMyProfile.get('mobile').touched">
+                                <small *ngIf="settingMyProfile.get('mobile').hasError('required')" class="error">Mobile number is required.</small>
+                                <small *ngIf="settingMyProfile.get('mobile').hasError('pattern')" class="error">Mobile number is invalid.</small>
+                                <small *ngIf="settingMyProfile.get('mobile').hasError('minlength') || settingMyProfile.get('mobile').hasError('maxlength')" class="error">Mobile number should be 6 to 15 digit.</small>
+                            </span>
+                        </div>
+                        
+                        
+
+                        <div class="action-btn ">
+                            <button mat-button type="submit" (click)="fnSubmitMyProfile()" class="sc-pink-btn pink-medium-btn">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="change-password-container col-6">
+                <p class="main-heading"> Change Password </p>
+               
+                <form [formGroup]="changePwd" class="with-validation">
+                    <div class="row mx-0 mt-4">
+                        <div class="col-12">
+                            <div class="input-group form-group">
+                                <input type="text" matInput [type]="hide1 ? 'password' : 'text'" formControlName="oldPassword" 
+                                class="form-control" placeholder="Old Password">
+                                <button mat-icon-button matSuffix (click)="hide1 = !hide1" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide1">
+                                    <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                  </button>
+                                  <span class="error-wrap" *ngIf="changePwd.get('oldPassword').touched || changePwd.get('oldPassword').dirty">
+                                    <small *ngIf="changePwd.get('oldPassword').hasError('required')" class="error">Old password is required.</small>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="input-group form-group">
+                                <input type="text" matInput [type]="hide2 ? 'password' : 'text'" formControlName="newPassword" placeholder="New Password"
+                                class="form-control">
+                                <button mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide2">
+                                    <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                  </button>
+                                  <span class="error-wrap" *ngIf="changePwd.get('newPassword').touched || changePwd.get('newPassword').dirty">
+                                    <small *ngIf="changePwd.get('newPassword').hasError('required')" class="error">New Password is required.</small>
+                                    <small *ngIf="changePwd.get('newPassword').hasError('minlength')" class="error">New Password should be minimum 8 character.</small>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="input-group form-group">
+                                <input type="password"  matInput formControlName="ReNewPassword" value="" placeholder="Confirm new password" class="form-control">
+                                  <span class="error-wrap" *ngIf="changePwd.get('ReNewPassword').dirty || changePwd.get('ReNewPassword').touched">
+                                    <small *ngIf="changePwd.get('ReNewPassword').hasError('required') || (changePwd.get('ReNewPassword').hasError('required') && changePwd.hasError('notSame'))" class="error text-left">Confirm password is required.</small>
+                                    <small *ngIf="!changePwd.get('ReNewPassword').hasError('required') && changePwd.hasError('notSame')" class="error text-left">Passwords do not match.</small>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <div class="d-block">
+                                <button mat-flat-button class="sc-pink-btn w-100" (click)="fnChangePassword()">Change Password</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+        
+            </div>
+        </div>
+    </mat-card>
+</mat-drawer-content>

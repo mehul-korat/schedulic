@@ -1,0 +1,184 @@
+<mat-drawer-content id="postal_codes" class="ml-0">
+    <div class="loader-main" *ngIf="isLoaderAdmin"><img src="../../../assets/images/sc-loader.svg" /></div>
+    <div class="left-side-menu setting-menu" [ngClass]="{ 'short-menu': settingSideMenuToggle === true }">
+        <div class="leftarrow-icon d-flex align-items-center">
+            <h6 class="mb-0">Resource Management</h6>
+            <span (click)="fnSettingMenuToggleSmall()" *ngIf="!settingSideMenuToggle" class="customer-drawer-leftarrow ml-auto pointer material-icons-outlined">arrow_circle_left</span>
+            <span (click)="fnSettingMenuToggleLarge()" *ngIf="settingSideMenuToggle" class="customer-drawer-leftarrow ml-auto pointer material-icons-outlined">arrow_circle_right</span>
+        </div>
+        <div routerLink="/admin/settings-resource" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/service.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/service-active.svg" />
+            </div>
+            <p>Services</p>
+        </div>
+        <div routerLink="/admin/settings-resource/staff" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/staff.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/staff-active.svg" />
+            </div>
+            <p>Staff</p>
+        </div>
+        <div routerLink="/admin/settings-resource/business-hours" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/business-hours.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/business-hours-active.svg" />
+            </div>
+            <p>Business Hours</p>
+        </div>
+        <div routerLink="/admin/settings-resource/postalcode" class="d-flex setting-menu-item setting-menu-active">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/postal-code.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/postal-code-active.svg" />
+            </div>
+            <p>Postal Codes</p>
+        </div>
+        <h6 class="pt-3">Account</h6>
+        <div routerLink="/admin/settings-account/company-details" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/business-detail.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/business-detail-active.svg" />
+            </div>
+            <p>Business Details</p>
+        </div>
+        <h6 class="pt-3">Payment</h6>
+        <div routerLink="/admin/settings-payment/billing" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/billing.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/billing-active.svg" />
+            </div>
+            <p>Billing</p>
+        </div>
+        <div routerLink="/admin/settings-payment/payment-gateway" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/payment-gateway.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/payment-gateway-active.svg" />
+            </div>
+            <p>Payment Gateway</p>
+        </div>
+        <div routerLink="/admin/settings-payment/payment-rules" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/payment-rules.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/payment-rules-active.svg" />
+            </div>
+            <p>Payment Rules</p>
+        </div>
+        <h6 class="pt-3">General Setting</h6>
+        <div routerLink="/admin/settings-general/appearance" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/appearance.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/appearance-active.svg" />
+            </div>
+            <p>Appearance</p>
+        </div>
+        <div routerLink="/admin/settings-general/booking-rules" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/booking-rules.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/booking-rules-active.svg" />
+            </div>
+            <p>Booking Rules</p>
+        </div>
+        <div routerLink="/admin/settings-general/alert-rules" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/alert-rules.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/alert-rules-active.svg" />
+            </div>
+            <p>Alert Rules</p>
+        </div>
+    </div>
+    <div class="setting-right-side-content" [ngClass]="{ 'short-content-area': settingSideMenuToggle === true }">
+        <div class="row mx-0 px-3 pt-3 p-1">
+            <div class="col-6">
+                <div class="d-flex mb-1">
+                    <h5 class="page-title">Postal Code</h5>
+                </div>
+                <p class="w-100 d-flex page-des">Add postal codes of locations to which your business can provide services. Customers belonging to those pin codes can only book appointments.</p>
+            </div>
+            
+            <div class="col-6">
+                <div class="d-flex float-right mt-2 flex-wrap justify-content-end">
+                    <button mat-button (click)="addcsvPostalCode()" class="sc-yellow-btn ml-2 mr-2"
+                        style="width: 190px;">Upload Postal Code</button>
+                    <button mat-button (click)="addPostalCode()" class="sc-pink-btn ml-2 mr-2">Add Postal Code</button>
+                </div>
+            </div>
+        </div>
+        <div class="main-postalcode-content">
+            <div class="postalcode-searchbox">
+                <form class="search_input-postalcode">
+                    <div class="form-group has-search">
+                        <span class="fa fa-search form-control-feedback verticalLine"></span>
+                        <input name="searchPostalCode" [(ngModel)]="search.postalCode" (keyup)="postalCodeSearch()"
+                            type="text" class="form-control" placeholder="Search Postal Codes">
+                    </div>
+                </form>
+                <mat-slide-toggle [checked]="PostalCodeCheckStatus" (change)="fnChangePostalCodeCheck($event.checked)"
+                    class="postalcode-check-status">Check Postal Code for Booking</mat-slide-toggle>
+            </div>
+            <div class="">
+                <div class="postalcode-table">
+                    <div class="main-table-content main-cust-table-content">
+                        <div class="">
+                            <div class="heads main-heading-content postalcode-box header-background " fxLayout="row">
+                                <div class="" fxFlex="33">
+                                    <mat-checkbox [checked]="selectAll" (change)="checkAll($event)" class=""></mat-checkbox> <span>Zipcode </span>
+                                </div>
+                                <!-- <div class="" fxFlex="20"></div> -->
+                                <div class="" fxFlex="33">Area</div>
+                                <!-- <div class="" fxFlex="20">Assigned Staff</div> -->
+                                <div class="text-end" fxFlex="33">
+                                    <div class="form-group ml-auto action-dropdown">
+
+                                        <mat-select placeholder="Select an option" class="text-left form-control form-control-transparent" [(ngModel)]="selectedValue"
+                                            (selectionChange)="fnSelectedPostalCodeStatus($event)"
+                                            [disabled]="postalCodeIdArr.length==0">
+                                            <!-- <mat-option value="">Select an option</mat-option> -->
+                                            <mat-option value="active">Set Active</mat-option>
+                                            <mat-option value="inactive">Set Inactive</mat-option>
+
+                                        </mat-select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="content" class="postalcode-list">
+                                <div class="postalcode-box" *ngFor="let postalCode of postalCodeList">
+                                    <div class="" fxFlex="33">
+                                        <mat-checkbox [checked]="postalCode.is_selected" (change)="fnAddPostalCodeId($event.checked,postalCode.id)">
+                                        </mat-checkbox>
+                                        {{postalCode.postal_code}}
+                                    </div>
+
+                                    <div class="" fxFlex="33">{{postalCode.area}}</div>
+                                    <!-- <div class=" " fxFlex="20">{{postalCode.staffs_count}}</div> -->
+                                    <div class="main-actions" fxFlex="33">
+                                        <div class="status-toggle mr-4">
+                                            <mat-slide-toggle [checked]="postalCode.postal_status"
+                                                (change)="fnChangePostalCodeStatus($event.checked,postalCode.id)">
+                                            </mat-slide-toggle>
+                                        </div>
+                                        <div class=" pointer mr-4" fxFlex="5"
+                                            (click)="fnDeletePostalCode(postalCode.id)"><i
+                                                class="fa fa-trash-o delete-box"></i></div>
+                                        <div class=" pointer" fxFlex="5" (click)="editPostalCode(postalCode.id)"><i
+                                                class="fa fa-pencil edit-box"></i></div>
+                                    </div>
+
+
+                                </div>
+                                <div class="no-postal-data" *ngIf="postalCodeList.length == 0">
+                                    <div class="no-data-badge">
+                                        <img src="/assets/images/nodata.svg" />
+                                        <label>No Data Found.</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-drawer-content>

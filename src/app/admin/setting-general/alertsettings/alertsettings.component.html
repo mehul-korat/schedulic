@@ -1,0 +1,1250 @@
+<mat-drawer-content id="alert-setting" class="ml-0">
+    <div class="loader-main" *ngIf="isLoaderAdmin"><img src="../../../assets/images/sc-loader.svg" /></div>
+    <div class="left-side-menu setting-menu" [ngClass]="{ 'short-menu': settingSideMenuToggle === true }">
+        <div class="leftarrow-icon d-flex align-items-center">
+            <h6 class="mb-0">Resource Management</h6>
+            <span (click)="fnSettingMenuToggleSmall()" *ngIf="!settingSideMenuToggle"
+                class="customer-drawer-leftarrow ml-auto pointer material-icons-outlined">arrow_circle_left</span>
+            <span (click)="fnSettingMenuToggleLarge()" *ngIf="settingSideMenuToggle"
+                class="customer-drawer-leftarrow ml-auto pointer material-icons-outlined">arrow_circle_right</span>
+        </div>
+        <div routerLink="/admin/settings-resource" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/service.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/service-active.svg" />
+            </div>
+            <p>Services</p>
+        </div>
+        <div routerLink="/admin/settings-resource/staff" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/staff.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/staff-active.svg" />
+            </div>
+            <p>Staff</p>
+        </div>
+        <div routerLink="/admin/settings-resource/business-hours" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/business-hours.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/business-hours-active.svg" />
+            </div>
+            <p>Business Hours</p>
+        </div>
+        <div routerLink="/admin/settings-resource/postalcode" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/postal-code.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/postal-code-active.svg" />
+            </div>
+            <p>Postal Codes</p>
+        </div>
+        <h6 class="pt-3">Account</h6>
+        <div routerLink="/admin/settings-account/company-details" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/business-detail.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/business-detail-active.svg" />
+            </div>
+            <p>Business Details</p>
+        </div>
+        <h6 class="pt-3">Payment</h6>
+        <div routerLink="/admin/settings-payment/billing" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/billing.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/billing-active.svg" />
+            </div>
+            <p>Billing</p>
+        </div>
+        <div routerLink="/admin/settings-payment/payment-gateway" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/payment-gateway.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/payment-gateway-active.svg" />
+            </div>
+            <p>Payment Gateway</p>
+        </div>
+        <div routerLink="/admin/settings-payment/payment-rules" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/payment-rules.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/payment-rules-active.svg" />
+            </div>
+            <p>Payment Rules</p>
+        </div>
+        <h6 class="pt-3">General Setting</h6>
+        <div routerLink="/admin/settings-general/appearance" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/appearance.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/appearance-active.svg" />
+            </div>
+            <p>Appearance</p>
+        </div>
+        <div routerLink="/admin/settings-general/booking-rules" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/booking-rules.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/booking-rules-active.svg" />
+            </div>
+            <p>Booking Rules</p>
+        </div>
+        <div routerLink="/admin/settings-general/alert-rules" class="d-flex setting-menu-item setting-menu-active">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/alert-rules.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/alert-rules-active.svg" />
+            </div>
+            <p>Alert Rules</p>
+        </div>
+    </div>
+    <div class="setting-right-side-content without-footer"
+        [ngClass]="{ 'short-content-area': settingSideMenuToggle === true }">
+        <div class="h-auto common-tab-group">
+            <div class="row mx-0 px-3 pt-3 p-1">
+                <div class="col-8">
+                    <div class="d-flex mb-1">
+                        <h5 class="page-title">Alert Settings</h5>
+                    </div>
+                    <p class="w-100 d-flex page-des">Set email and SMS alerts to your customers, staff members, and admin. You can customize your alerts as well.</p>
+                </div>
+                
+            </div>
+            <mat-tab-group class="common-tab-group">
+                <mat-tab label="Email Alert">
+                    <h5 class="common-alert-heading">Alert Sent to Customers</h5>
+                    <mat-card class="matcard-space">
+                        <div class="common-alert-card border-top-none">
+                            <div>
+                                <h5>Appointment Reminders</h5>
+                                <p class=""> Remind customers about upcoming appointments</p>
+                            </div>
+                            <div class="">
+                                <mat-slide-toggle [checked]="appointmentsReminder"
+                                    (change)="fnAppointmentsReminder($event.checked)"></mat-slide-toggle>
+                            </div>
+                        </div>
+                        <div *ngIf="appointmentsReminder">
+                            <div class="common-alert-card">
+                                <div>
+                                    <h5>Send an Email</h5>
+                                    <p class="">Appointment status</p>
+                                </div>
+                                <div class="d-flex main-checkbox-select-wrap">
+                                    <div class="custom-check-box">
+                                        <div class="checked round">
+                                            <mat-checkbox [checked]="emailCustomerAppointment['booked'].status == '1'"
+                                                (change)="fnCusEmailAppoint($event.checked, 'booked')"
+                                                class="form_field_checkbox"></mat-checkbox>
+                                            <p class="check-label">Booked</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="custom-check-box">
+                                        <div class="checked round status-update-main">
+                                            <mat-checkbox [checked]="emailCustomerAppointment['status_updated'].status
+                    == '1'" (change)="fnCusEmailAppoint($event.checked,
+                    'status_updated')" class="form_field_checkbox"></mat-checkbox>
+                                            <p class="check-label">Status Updated</p>
+                                        </div>
+                                    </div>
+                                    <div class="custom-check-box">
+                                        <div class="checked round cancel-check-btn">
+                                            <mat-checkbox [checked]="emailCustomerAppointment['cancelled'].status ==
+                    '1'" (change)="fnCusEmailAppoint($event.checked,
+                    'cancelled')" class="form_field_checkbox"></mat-checkbox>
+                                            <p class="check-label">Cancelled</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="common-alert-card-two">
+                                <div class="main-lead-wrap">
+                                    <div class="w-100">
+                                        <h5>Reminder Lead Time</h5>
+                                        <p>Send a reminder to customers before each appointment</p>
+                                    </div>
+                                    <div class="main-lead-time">
+                                        <div class="common-lead-select">
+                                            <mat-select class="form-control form-control-transparent"
+                                                (selectionChange)="fnSetCustomerEmailReminderTime($event)"
+                                                [(value)]="emailAlertCustomerDays">
+                                                <mat-option value="0">0 days</mat-option>
+                                                <mat-option value="1">1 days</mat-option>
+                                                <mat-option value="2">2 days</mat-option>
+                                                <mat-option value="3">3 days</mat-option>
+                                                <mat-option value="4">4 days</mat-option>
+                                                <mat-option value="5">5 days</mat-option>
+                                                <mat-option value="6">6 days</mat-option>
+                                                <mat-option value="7">7 days</mat-option>
+                                                <mat-option value="8">8 days</mat-option>
+                                                <mat-option value="9">9 days</mat-option>
+                                                <mat-option value="10">10 days</mat-option>
+                                                <mat-option value="11">11 days</mat-option>
+                                                <mat-option value="12">12 days</mat-option>
+                                                <mat-option value="13">13 days</mat-option>
+                                                <mat-option value="14">14 days</mat-option>
+                                                <mat-option value="15">15 days</mat-option>
+                                                <mat-option value="16">16 days</mat-option>
+                                                <mat-option value="17">17 days</mat-option>
+                                                <mat-option value="18">18 days</mat-option>
+                                                <mat-option value="19">19 days</mat-option>
+                                                <mat-option value="20">20 days</mat-option>
+                                                <mat-option value="21">21 days</mat-option>
+                                                <mat-option value="22">22 days</mat-option>
+                                                <mat-option value="23">23 days</mat-option>
+                                                <mat-option value="24">24 days</mat-option>
+                                                <mat-option value="25">25 days</mat-option>
+                                                <mat-option value="26">26 days</mat-option>
+                                                <mat-option value="27">27 days</mat-option>
+                                                <mat-option value="28">28 days</mat-option>
+                                                <mat-option value="29">29 days</mat-option>
+                                                <mat-option value="30">30 days</mat-option>
+                                            </mat-select>
+
+                                        </div>
+                                        <div class="common-lead-select">
+
+                                            <mat-select class="form-control form-control-transparent"
+                                                (selectionChange)="fnSetCustomerEmailReminderTime($event)"
+                                                [(value)]="emailAlertCustomerHours">
+                                                <mat-option value="0">0 Hours</mat-option>
+                                                <mat-option value="1">1 Hours</mat-option>
+                                                <mat-option value="2">2 Hours</mat-option>
+                                                <mat-option value="3">3 Hours</mat-option>
+                                                <mat-option value="4">4 Hours</mat-option>
+                                                <mat-option value="5">5 Hours</mat-option>
+                                                <mat-option value="6">6 Hours</mat-option>
+                                                <mat-option value="7">7 Hours</mat-option>
+                                                <mat-option value="8">8 Hours</mat-option>
+                                                <mat-option value="9">9 Hours</mat-option>
+                                                <mat-option value="10">10 Hours</mat-option>
+                                                <mat-option value="11">11 Hours</mat-option>
+                                                <mat-option value="12">12 Hours</mat-option>
+                                                <mat-option value="13">13 Hours</mat-option>
+                                                <mat-option value="14">14 Hours</mat-option>
+                                                <mat-option value="15">15 Hours</mat-option>
+                                                <mat-option value="16">16 Hours</mat-option>
+                                                <mat-option value="17">17 Hours</mat-option>
+                                                <mat-option value="18">18 Hours</mat-option>
+                                                <mat-option value="19">19 Hours</mat-option>
+                                                <mat-option value="20">20 Hours</mat-option>
+                                                <mat-option value="21">21 Hours</mat-option>
+                                                <mat-option value="22">22 Hours</mat-option>
+                                                <mat-option value="23">23 Hours</mat-option>
+                                            </mat-select>
+
+                                        </div>
+                                        <div class="common-lead-select">
+
+                                            <mat-select class="form-control form-control-transparent"
+                                                (selectionChange)="fnSetCustomerEmailReminderTime($event)"
+                                                [(value)]="emailAlertCustomerMinutes">
+                                                <mat-option value="0">0 Minutes</mat-option>
+                                                <mat-option value="1">1 Minutes</mat-option>
+                                                <mat-option value="2">2 Minutes</mat-option>
+                                                <mat-option value="3">3 Minutes</mat-option>
+                                                <mat-option value="4">4 Minutes</mat-option>
+                                                <mat-option value="5">5 Minutes</mat-option>
+                                                <mat-option value="6">6 Minutes</mat-option>
+                                                <mat-option value="7">7 Minutes</mat-option>
+                                                <mat-option value="8">8 Minutes</mat-option>
+                                                <mat-option value="9">9 Minutes</mat-option>
+                                                <mat-option value="10">10 Minutes</mat-option>
+                                                <mat-option value="11">11 Minutes</mat-option>
+                                                <mat-option value="12">12 Minutes</mat-option>
+                                                <mat-option value="13">13 Minutes</mat-option>
+                                                <mat-option value="14">14 Minutes</mat-option>
+                                                <mat-option value="15">15 Minutes</mat-option>
+                                                <mat-option value="16">16 Minutes</mat-option>
+                                                <mat-option value="17">17 Minutes</mat-option>
+                                                <mat-option value="18">18 Minutes</mat-option>
+                                                <mat-option value="19">19 Minutes</mat-option>
+                                                <mat-option value="20">20 Minutes</mat-option>
+                                                <mat-option value="21">21 Minutes</mat-option>
+                                                <mat-option value="22">22 Minutes</mat-option>
+                                                <mat-option value="23">23 Minutes</mat-option>
+                                                <mat-option value="24">24 Minutes</mat-option>
+                                                <mat-option value="25">25 Minutes</mat-option>
+                                                <mat-option value="26">26 Minutes</mat-option>
+                                                <mat-option value="27">27 Minutes</mat-option>
+                                                <mat-option value="28">28 Minutes</mat-option>
+                                                <mat-option value="29">29 Minutes</mat-option>
+                                                <mat-option value="30">30 Minutes</mat-option>
+                                                <mat-option value="31">31 Minutes</mat-option>
+                                                <mat-option value="32">32 Minutes</mat-option>
+                                                <mat-option value="33">33 Minutes</mat-option>
+                                                <mat-option value="34">34 Minutes</mat-option>
+                                                <mat-option value="35">35 Minutes</mat-option>
+                                                <mat-option value="36">36 Minutes</mat-option>
+                                                <mat-option value="37">37 Minutes</mat-option>
+                                                <mat-option value="38">38 Minutes</mat-option>
+                                                <mat-option value="39">39 Minutes</mat-option>
+                                                <mat-option value="40">40 Minutes</mat-option>
+                                                <mat-option value="41">41 Minutes</mat-option>
+                                                <mat-option value="42">42 Minutes</mat-option>
+                                                <mat-option value="43">43 Minutes</mat-option>
+                                                <mat-option value="44">44 Minutes</mat-option>
+                                                <mat-option value="45">45 Minutes</mat-option>
+                                                <mat-option value="46">46 Minutes</mat-option>
+                                                <mat-option value="47">47 Minutes</mat-option>
+                                                <mat-option value="48">48 Minutes</mat-option>
+                                                <mat-option value="49">49 Minutes</mat-option>
+                                                <mat-option value="50">50 Minutes</mat-option>
+                                                <mat-option value="51">51 Minutes</mat-option>
+                                                <mat-option value="52">52 Minutes</mat-option>
+                                                <mat-option value="53">53 Minutes</mat-option>
+                                                <mat-option value="54">54 Minutes</mat-option>
+                                                <mat-option value="55">55 Minutes</mat-option>
+                                                <mat-option value="56">56 Minutes</mat-option>
+                                                <mat-option value="57">57 Minutes</mat-option>
+                                                <mat-option value="58">58 Minutes</mat-option>
+                                                <mat-option value="59">59 Minutes</mat-option>
+                                            </mat-select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button mat-button class="sc-pink-btn my-3"
+                                        (click)="fnSubmitCusEmailAlert()">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card>
+                    <h5 class="common-alert-heading">Alert Sent to Staff</h5>
+                    <mat-card class="matcard-space">
+                        <div class="common-alert-card border-top-none">
+                            <div>
+                                <h5>Appointment Reminders</h5>
+                                <p class="">Remind staff about upcoming appointments</p>
+                            </div>
+                            <div class="">
+                                <mat-slide-toggle [checked]="appointmentsReminderStaff"
+                                    (change)="fnAppointmentsReminderStaff($event.checked)"></mat-slide-toggle>
+                            </div>
+                        </div>
+                        <div *ngIf="appointmentsReminderStaff">
+                            <div class="common-alert-card">
+                                <div>
+                                    <h5>Send an Email</h5>
+                                    <p class="">Appointment status</p>
+                                </div>
+
+                                <div class="d-flex main-checkbox-select-wrap">
+                                    <div class="custom-check-box">
+                                        <div class="checked round">
+                                            <mat-checkbox [checked]="emailStaffAppointment['booked'].status == '1'"
+                                                (change)="fnStaffEmailAppoint($event.checked, 'booked')"
+                                                class="form_field_checkbox"></mat-checkbox>
+                                            <p class="check-label">Booked</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="custom-check-box">
+                                        <div class="checked round status-update-main">
+                                            <mat-checkbox [checked]="emailStaffAppointment['status_updated'].status ==
+                    '1'" (change)="fnStaffEmailAppoint($event.checked,
+                    'status_updated')" class="form_field_checkbox"></mat-checkbox>
+                                            <p class="check-label">Status Updated</p>
+                                        </div>
+                                    </div>
+                                    <div class="custom-check-box">
+                                        <div class="checked round cancel-check-btn">
+                                            <mat-checkbox [checked]="emailStaffAppointment['cancelled'].status == '1'"
+                                                (change)="fnStaffEmailAppoint($event.checked, 'cancelled')"
+                                                class="form_field_checkbox"></mat-checkbox>
+                                            <p class="check-label">Cancelled</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="common-alert-card-two">
+                                <div class="main-lead-wrap">
+                                    <div class="w-100">
+                                        <h5>Reminder Lead Time</h5>
+                                        <p>Send a reminder to staff before each appointment</p>
+                                    </div>
+                                    <div class="main-lead-time">
+                                        <div class="common-lead-select">
+                                            <mat-select class="form-control form-control-transparent"
+                                                (selectionChange)="fnSetStaffEmailReminderTime($event)"
+                                                [(value)]="emailAlertStaffDays">
+                                                <mat-option value="0">0 days</mat-option>
+                                                <mat-option value="1">1 days</mat-option>
+                                                <mat-option value="2">2 days</mat-option>
+                                                <mat-option value="3">3 days</mat-option>
+                                                <mat-option value="4">4 days</mat-option>
+                                                <mat-option value="5">5 days</mat-option>
+                                                <mat-option value="6">6 days</mat-option>
+                                                <mat-option value="7">7 days</mat-option>
+                                                <mat-option value="8">8 days</mat-option>
+                                                <mat-option value="9">9 days</mat-option>
+                                                <mat-option value="10">10 days</mat-option>
+                                                <mat-option value="11">11 days</mat-option>
+                                                <mat-option value="12">12 days</mat-option>
+                                                <mat-option value="13">13 days</mat-option>
+                                                <mat-option value="14">14 days</mat-option>
+                                                <mat-option value="15">15 days</mat-option>
+                                                <mat-option value="16">16 days</mat-option>
+                                                <mat-option value="17">17 days</mat-option>
+                                                <mat-option value="18">18 days</mat-option>
+                                                <mat-option value="19">19 days</mat-option>
+                                                <mat-option value="20">20 days</mat-option>
+                                                <mat-option value="21">21 days</mat-option>
+                                                <mat-option value="22">22 days</mat-option>
+                                                <mat-option value="23">23 days</mat-option>
+                                                <mat-option value="24">24 days</mat-option>
+                                                <mat-option value="25">25 days</mat-option>
+                                                <mat-option value="26">26 days</mat-option>
+                                                <mat-option value="27">27 days</mat-option>
+                                                <mat-option value="28">28 days</mat-option>
+                                                <mat-option value="29">29 days</mat-option>
+                                                <mat-option value="30">30 days</mat-option>
+                                            </mat-select>
+                                        </div>
+                                        <div class="common-lead-select">
+                                            <mat-select class="form-control form-control-transparent"
+                                                (selectionChange)="fnSetStaffEmailReminderTime($event)"
+                                                [(value)]="emailAlertStaffHours">
+                                                <mat-option value="0">0 Hours</mat-option>
+                                                <mat-option value="1">1 Hours</mat-option>
+                                                <mat-option value="2">2 Hours</mat-option>
+                                                <mat-option value="3">3 Hours</mat-option>
+                                                <mat-option value="4">4 Hours</mat-option>
+                                                <mat-option value="5">5 Hours</mat-option>
+                                                <mat-option value="6">6 Hours</mat-option>
+                                                <mat-option value="7">7 Hours</mat-option>
+                                                <mat-option value="8">8 Hours</mat-option>
+                                                <mat-option value="9">9 Hours</mat-option>
+                                                <mat-option value="10">10 Hours</mat-option>
+                                                <mat-option value="11">11 Hours</mat-option>
+                                                <mat-option value="12">12 Hours</mat-option>
+                                                <mat-option value="13">13 Hours</mat-option>
+                                                <mat-option value="14">14 Hours</mat-option>
+                                                <mat-option value="15">15 Hours</mat-option>
+                                                <mat-option value="16">16 Hours</mat-option>
+                                                <mat-option value="17">17 Hours</mat-option>
+                                                <mat-option value="18">18 Hours</mat-option>
+                                                <mat-option value="19">19 Hours</mat-option>
+                                                <mat-option value="20">20 Hours</mat-option>
+                                                <mat-option value="21">21 Hours</mat-option>
+                                                <mat-option value="22">22 Hours</mat-option>
+                                                <mat-option value="23">23 Hours</mat-option>
+                                            </mat-select>
+                                        </div>
+                                        <div class="common-lead-select">
+                                            <mat-select class="form-control form-control-transparent"
+                                                (selectionChange)="fnSetStaffEmailReminderTime($event)"
+                                                [(value)]="emailAlertStaffMinutes">
+                                                <mat-option value="0">0 Minutes</mat-option>
+                                                <mat-option value="1">1 Minutes</mat-option>
+                                                <mat-option value="2">2 Minutes</mat-option>
+                                                <mat-option value="3">3 Minutes</mat-option>
+                                                <mat-option value="4">4 Minutes</mat-option>
+                                                <mat-option value="5">5 Minutes</mat-option>
+                                                <mat-option value="6">6 Minutes</mat-option>
+                                                <mat-option value="7">7 Minutes</mat-option>
+                                                <mat-option value="8">8 Minutes</mat-option>
+                                                <mat-option value="9">9 Minutes</mat-option>
+                                                <mat-option value="10">10 Minutes</mat-option>
+                                                <mat-option value="11">11 Minutes</mat-option>
+                                                <mat-option value="12">12 Minutes</mat-option>
+                                                <mat-option value="13">13 Minutes</mat-option>
+                                                <mat-option value="14">14 Minutes</mat-option>
+                                                <mat-option value="15">15 Minutes</mat-option>
+                                                <mat-option value="16">16 Minutes</mat-option>
+                                                <mat-option value="17">17 Minutes</mat-option>
+                                                <mat-option value="18">18 Minutes</mat-option>
+                                                <mat-option value="19">19 Minutes</mat-option>
+                                                <mat-option value="20">20 Minutes</mat-option>
+                                                <mat-option value="21">21 Minutes</mat-option>
+                                                <mat-option value="22">22 Minutes</mat-option>
+                                                <mat-option value="23">23 Minutes</mat-option>
+                                                <mat-option value="24">24 Minutes</mat-option>
+                                                <mat-option value="25">25 Minutes</mat-option>
+                                                <mat-option value="26">26 Minutes</mat-option>
+                                                <mat-option value="27">27 Minutes</mat-option>
+                                                <mat-option value="28">28 Minutes</mat-option>
+                                                <mat-option value="29">29 Minutes</mat-option>
+                                                <mat-option value="30">30 Minutes</mat-option>
+                                                <mat-option value="31">31 Minutes</mat-option>
+                                                <mat-option value="32">32 Minutes</mat-option>
+                                                <mat-option value="33">33 Minutes</mat-option>
+                                                <mat-option value="34">34 Minutes</mat-option>
+                                                <mat-option value="35">35 Minutes</mat-option>
+                                                <mat-option value="36">36 Minutes</mat-option>
+                                                <mat-option value="37">37 Minutes</mat-option>
+                                                <mat-option value="38">38 Minutes</mat-option>
+                                                <mat-option value="39">39 Minutes</mat-option>
+                                                <mat-option value="40">40 Minutes</mat-option>
+                                                <mat-option value="41">41 Minutes</mat-option>
+                                                <mat-option value="42">42 Minutes</mat-option>
+                                                <mat-option value="43">43 Minutes</mat-option>
+                                                <mat-option value="44">44 Minutes</mat-option>
+                                                <mat-option value="45">45 Minutes</mat-option>
+                                                <mat-option value="46">46 Minutes</mat-option>
+                                                <mat-option value="47">47 Minutes</mat-option>
+                                                <mat-option value="48">48 Minutes</mat-option>
+                                                <mat-option value="49">49 Minutes</mat-option>
+                                                <mat-option value="50">50 Minutes</mat-option>
+                                                <mat-option value="51">51 Minutes</mat-option>
+                                                <mat-option value="52">52 Minutes</mat-option>
+                                                <mat-option value="53">53 Minutes</mat-option>
+                                                <mat-option value="54">54 Minutes</mat-option>
+                                                <mat-option value="55">55 Minutes</mat-option>
+                                                <mat-option value="56">56 Minutes</mat-option>
+                                                <mat-option value="57">57 Minutes</mat-option>
+                                                <mat-option value="58">58 Minutes</mat-option>
+                                                <mat-option value="59">59 Minutes</mat-option>
+                                            </mat-select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button mat-button class="sc-pink-btn my-3"
+                                    (click)="fnSubmitStaffEmailAlert()">Save</button>
+                            </div>
+                        </div>
+                    </mat-card>
+                    <h5 class="common-alert-heading">Alert Sent to Admin</h5>
+                    <mat-card class="matcard-space">
+                        <div class="common-alert-card border-top-none">
+                            <div>
+                                <h5>Appointment Reminders</h5>
+                                <p class="">Remind customers about upcoming appointments</p>
+                            </div>
+                            <div class="">
+                                <mat-slide-toggle [checked]="appointmentsReminderAdmin"
+                                    (change)="fnAppointmentsReminderAdmin($event.checked)"></mat-slide-toggle>
+                            </div>
+                        </div>
+                        <div *ngIf="appointmentsReminderAdmin">
+                            <div class="common-alert-card">
+                                <div>
+                                    <h5>Add Email Id</h5>
+                                    <p class="mb-0">Lorem ipsum is dummy text used for Typesetting</p>
+                                </div>
+                                <div class="col-6 mail-form-main">
+                                    <form [formGroup]="adminEmailForAlert" class="example-form">
+
+                                        <input formControlName="alertEmail" class="form-control form-control-transparent"
+                                            placeholder="Enter Your Email">
+                                        <span class="error-wrap" *ngIf="adminEmailForAlert.get('alertEmail').dirty ||
+                  adminEmailForAlert.get('alertEmail').touched">
+                                            <small *ngIf="adminEmailForAlert.get('alertEmail').hasError('required')"
+                                                class="error">Email is required.</small>
+                                            <small *ngIf="adminEmailForAlert.get('alertEmail').hasError('email')
+                    || adminEmailForAlert.get('alertEmail').hasError('pattern')" class="error">Enter valid
+                                                email.</small>
+                                        </span>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="common-alert-card">
+                                <div>
+                                    <h5>Send an Email</h5>
+                                    <p>Appointment status</p>
+                                </div>
+
+                                <div class="d-flex main-checkbox-select-wrap">
+                                    <div class="custom-check-box">
+                                        <div class="checked round">
+                                            <mat-checkbox [checked]="emailAdminAppointment['booked'].status == '1'"
+                                                (change)="fnAdminEmailAppoint($event.checked, 'booked')"
+                                                class="form_field_checkbox"></mat-checkbox>
+                                            <p class="check-label">Booked</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="custom-check-box">
+                                        <div class="checked round status-update-main">
+                                            <mat-checkbox [checked]="emailAdminAppointment['status_updated'].status ==
+                                        '1'" (change)="fnAdminEmailAppoint($event.checked,
+                                        'status_updated')" class="form_field_checkbox"></mat-checkbox>
+                                            <p class="check-label">Status Updated</p>
+                                        </div>
+                                    </div>
+                                    <div class="custom-check-box">
+                                        <div class="checked round cancel-check-btn">
+                                            <mat-checkbox [checked]="emailAdminAppointment['cancelled'].status == '1'"
+                                                (change)="fnAdminEmailAppoint($event.checked, 'cancelled')"
+                                                class="form_field_checkbox"></mat-checkbox>
+                                            <p class="check-label">Cancelled</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="common-alert-card-two">
+                                <div class="main-lead-wrap">
+                                    <div class="w-100">
+                                        <h5>Reminder Lead Time</h5>
+                                        <p>Send a reminder to customer before each appointment</p>
+                                    </div>
+                                    <div class="main-lead-time">
+                                        <div class="common-lead-select">
+                                            <mat-select class="form-control form-control-transparent"
+                                                (selectionChange)="fnSetAdminEmailReminderTime($event)"
+                                                [(value)]="emailAlertAdminDays">
+                                                <mat-option value="0">0 days</mat-option>
+                                                <mat-option value="1">1 days</mat-option>
+                                                <mat-option value="2">2 days</mat-option>
+                                                <mat-option value="3">3 days</mat-option>
+                                                <mat-option value="4">4 days</mat-option>
+                                                <mat-option value="5">5 days</mat-option>
+                                                <mat-option value="6">6 days</mat-option>
+                                                <mat-option value="7">7 days</mat-option>
+                                                <mat-option value="8">8 days</mat-option>
+                                                <mat-option value="9">9 days</mat-option>
+                                                <mat-option value="10">10 days</mat-option>
+                                                <mat-option value="11">11 days</mat-option>
+                                                <mat-option value="12">12 days</mat-option>
+                                                <mat-option value="13">13 days</mat-option>
+                                                <mat-option value="14">14 days</mat-option>
+                                                <mat-option value="15">15 days</mat-option>
+                                                <mat-option value="16">16 days</mat-option>
+                                                <mat-option value="17">17 days</mat-option>
+                                                <mat-option value="18">18 days</mat-option>
+                                                <mat-option value="19">19 days</mat-option>
+                                                <mat-option value="20">20 days</mat-option>
+                                                <mat-option value="21">21 days</mat-option>
+                                                <mat-option value="22">22 days</mat-option>
+                                                <mat-option value="23">23 days</mat-option>
+                                                <mat-option value="24">24 days</mat-option>
+                                                <mat-option value="25">25 days</mat-option>
+                                                <mat-option value="26">26 days</mat-option>
+                                                <mat-option value="27">27 days</mat-option>
+                                                <mat-option value="28">28 days</mat-option>
+                                                <mat-option value="29">29 days</mat-option>
+                                                <mat-option value="30">30 days</mat-option>
+                                            </mat-select>
+                                        </div>
+                                        <div class="common-lead-select">
+
+                                            <mat-select class="form-control form-control-transparent"
+                                                (selectionChange)="fnSetAdminEmailReminderTime($event)"
+                                                [(value)]="emailAlertAdminHours">
+                                                <mat-option value="0">0 Hours</mat-option>
+                                                <mat-option value="1">1 Hours</mat-option>
+                                                <mat-option value="2">2 Hours</mat-option>
+                                                <mat-option value="3">3 Hours</mat-option>
+                                                <mat-option value="4">4 Hours</mat-option>
+                                                <mat-option value="5">5 Hours</mat-option>
+                                                <mat-option value="6">6 Hours</mat-option>
+                                                <mat-option value="7">7 Hours</mat-option>
+                                                <mat-option value="8">8 Hours</mat-option>
+                                                <mat-option value="9">9 Hours</mat-option>
+                                                <mat-option value="10">10 Hours</mat-option>
+                                                <mat-option value="11">11 Hours</mat-option>
+                                                <mat-option value="12">12 Hours</mat-option>
+                                                <mat-option value="13">13 Hours</mat-option>
+                                                <mat-option value="14">14 Hours</mat-option>
+                                                <mat-option value="15">15 Hours</mat-option>
+                                                <mat-option value="16">16 Hours</mat-option>
+                                                <mat-option value="17">17 Hours</mat-option>
+                                                <mat-option value="18">18 Hours</mat-option>
+                                                <mat-option value="19">19 Hours</mat-option>
+                                                <mat-option value="20">20 Hours</mat-option>
+                                                <mat-option value="21">21 Hours</mat-option>
+                                                <mat-option value="22">22 Hours</mat-option>
+                                                <mat-option value="23">23 Hours</mat-option>
+                                            </mat-select>
+                                        </div>
+                                        <div class="common-lead-select">
+
+                                            <mat-select class="form-control form-control-transparent"
+                                                (selectionChange)="fnSetAdminEmailReminderTime($event)"
+                                                [(value)]="emailAlertAdminMinutes">
+                                                <mat-option value="0">0 Minutes</mat-option>
+                                                <mat-option value="1">1 Minutes</mat-option>
+                                                <mat-option value="2">2 Minutes</mat-option>
+                                                <mat-option value="3">3 Minutes</mat-option>
+                                                <mat-option value="4">4 Minutes</mat-option>
+                                                <mat-option value="5">5 Minutes</mat-option>
+                                                <mat-option value="6">6 Minutes</mat-option>
+                                                <mat-option value="7">7 Minutes</mat-option>
+                                                <mat-option value="8">8 Minutes</mat-option>
+                                                <mat-option value="9">9 Minutes</mat-option>
+                                                <mat-option value="10">10 Minutes</mat-option>
+                                                <mat-option value="11">11 Minutes</mat-option>
+                                                <mat-option value="12">12 Minutes</mat-option>
+                                                <mat-option value="13">13 Minutes</mat-option>
+                                                <mat-option value="14">14 Minutes</mat-option>
+                                                <mat-option value="15">15 Minutes</mat-option>
+                                                <mat-option value="16">16 Minutes</mat-option>
+                                                <mat-option value="17">17 Minutes</mat-option>
+                                                <mat-option value="18">18 Minutes</mat-option>
+                                                <mat-option value="19">19 Minutes</mat-option>
+                                                <mat-option value="20">20 Minutes</mat-option>
+                                                <mat-option value="21">21 Minutes</mat-option>
+                                                <mat-option value="22">22 Minutes</mat-option>
+                                                <mat-option value="23">23 Minutes</mat-option>
+                                                <mat-option value="24">24 Minutes</mat-option>
+                                                <mat-option value="25">25 Minutes</mat-option>
+                                                <mat-option value="26">26 Minutes</mat-option>
+                                                <mat-option value="27">27 Minutes</mat-option>
+                                                <mat-option value="28">28 Minutes</mat-option>
+                                                <mat-option value="29">29 Minutes</mat-option>
+                                                <mat-option value="30">30 Minutes</mat-option>
+                                                <mat-option value="31">31 Minutes</mat-option>
+                                                <mat-option value="32">32 Minutes</mat-option>
+                                                <mat-option value="33">33 Minutes</mat-option>
+                                                <mat-option value="34">34 Minutes</mat-option>
+                                                <mat-option value="35">35 Minutes</mat-option>
+                                                <mat-option value="36">36 Minutes</mat-option>
+                                                <mat-option value="37">37 Minutes</mat-option>
+                                                <mat-option value="38">38 Minutes</mat-option>
+                                                <mat-option value="39">39 Minutes</mat-option>
+                                                <mat-option value="40">40 Minutes</mat-option>
+                                                <mat-option value="41">41 Minutes</mat-option>
+                                                <mat-option value="42">42 Minutes</mat-option>
+                                                <mat-option value="43">43 Minutes</mat-option>
+                                                <mat-option value="44">44 Minutes</mat-option>
+                                                <mat-option value="45">45 Minutes</mat-option>
+                                                <mat-option value="46">46 Minutes</mat-option>
+                                                <mat-option value="47">47 Minutes</mat-option>
+                                                <mat-option value="48">48 Minutes</mat-option>
+                                                <mat-option value="49">49 Minutes</mat-option>
+                                                <mat-option value="50">50 Minutes</mat-option>
+                                                <mat-option value="51">51 Minutes</mat-option>
+                                                <mat-option value="52">52 Minutes</mat-option>
+                                                <mat-option value="53">53 Minutes</mat-option>
+                                                <mat-option value="54">54 Minutes</mat-option>
+                                                <mat-option value="55">55 Minutes</mat-option>
+                                                <mat-option value="56">56 Minutes</mat-option>
+                                                <mat-option value="57">57 Minutes</mat-option>
+                                                <mat-option value="58">58 Minutes</mat-option>
+                                                <mat-option value="59">59 Minutes</mat-option>
+                                            </mat-select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button mat-button class="sc-pink-btn  my-3"
+                                    (click)="fnSubmitAdminEmailAlert()">Save</button>
+                            </div>
+
+                        </div>
+                    </mat-card>
+                    <h5 class="common-alert-heading">Customize Your Alerts
+                    </h5>
+                    <mat-card class="matcard-space">
+                        <form [formGroup]="customizeAlert" class="example-form">
+                            <div class="common-customize-alert">
+                                <h5>Sender Name</h5>
+                                <p>Notification emails sent to customers will have the following email signature</p>
+
+                                <input formControlName="senderName" class=" mt-3 form-control form-control-transparent" placeholder="Sender Name">
+                                <span class="error-wrap"
+                                    *ngIf="customizeAlert.get('senderName').dirty || customizeAlert.get('senderName').touched">
+                                    <small *ngIf="customizeAlert.get('senderName').hasError('required')"
+                                        class="error">Sender name is required.</small>
+                                </span>
+                            </div>
+                            <div class="common-customize-alert">
+                                <h5>Email Signature</h5>
+                                <p>Notification emails sent to customers will have the following sender name</p>
+
+                                <textarea class="mt-3 form-control form-control-transparent" row="5" #signature (keyup)="count(signature.value)"
+                                    formControlName="emailSignature" maxlength="500" matInput
+                                    placeholder="Type Here"></textarea>
+                                <mat-hint class="bottom-char-main">Characters Left:<span class="">{{characters}}</span>
+                                </mat-hint>
+                                <span class="error-wrap"
+                                    *ngIf="customizeAlert.get('emailSignature').dirty || customizeAlert.get('emailSignature').touched">
+                                    <small *ngIf="customizeAlert.get('emailSignature').hasError('required')"
+                                        class="error">Email signature is required.</small>
+                                </span>
+                            </div>
+                            <button mat-button class="sc-pink-btn my-3" (click)="fnSubmitCustomizeAlert()">Save</button>
+                        </form>
+                    </mat-card>
+                </mat-tab>
+                <mat-tab label="SMS Alert">
+                    <h5 class="common-alert-heading"> SMS Reminders </h5>
+                    <mat-card class="matcard-space">
+                        <div class="common-alert-card border-top-none">
+                            <div>
+                                <h5>Appointments SMS Reminders</h5>
+                                <p> Lorem Ipsum has been the industry's standard dummy. </p>
+                            </div>
+                            <div class="">
+                                <mat-slide-toggle [checked]="appointmentsReminderSMS"
+                                    (change)="fnAppointmentsReminderSMS($event.checked)"></mat-slide-toggle>
+                            </div>
+                        </div>
+                        <div *ngIf="appointmentsReminderSMS">
+                            <div class="common-alert-card">
+                                <div class="">
+                                    <h5>When to send</h5>
+                                    <p class="">Appointments</p>
+                                </div>
+
+                                <div class="d-flex main-checkbox-select-wrap">
+                                    <div class="custom-check-box">
+                                        <div class="checked round">
+                                            <mat-checkbox [checked]="smsAppointment['booked'].status == '1'"
+                                                (change)="fnSmsAppoint($event.checked, 'booked')"
+                                                class="form_field_checkbox"></mat-checkbox>
+                                            <p class="check-label">Booked</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="custom-check-box">
+                                        <div class="checked round status-update-main">
+                                            <mat-checkbox [checked]="smsAppointment['status_updated'].status == '1'"
+                                                (change)="fnSmsAppoint($event.checked, 'status_updated')"
+                                                class="form_field_checkbox"></mat-checkbox>
+                                            <p class="check-label">Status Updated</p>
+                                        </div>
+                                    </div>
+                                    <div class="custom-check-box">
+                                        <div class="checked round cancel-check-btn">
+                                            <mat-checkbox [checked]="smsAppointment['cancelled'].status == '1'"
+                                                (change)="fnSmsAppoint($event.checked, 'cancelled')"
+                                                class="form_field_checkbox"></mat-checkbox>
+                                            <p class="check-label">Cancelled</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="common-alert-card">
+                                <div class="">
+                                    <h5 class="">Who to send SMS to</h5>
+                                    <p> SMS Alert </p>
+                                </div>
+                                <div class="d-flex main-checkbox-select-wrap">
+                                    <div class="custom-check-box">
+                                        <div class="checked round cancel-check-btn">
+                                            <mat-checkbox class="form_field_checkbox"
+                                                [checked]="smsAlertWho['admin'].status == '1'"
+                                                (change)="fnSmsWho($event.checked, 'admin')"></mat-checkbox>
+                                            <p class="check-label">Admin</p>
+                                        </div>
+                                    </div>
+                                    <div class="custom-check-box">
+                                        <div class="checked round cancel-check-btn">
+                                            <mat-checkbox class="form_field_checkbox"
+                                                [checked]="smsAlertWho['customer'].status == '1'"
+                                                (change)="fnSmsWho($event.checked, 'customer')"></mat-checkbox>
+                                            <p class="check-label">Customer</p>
+                                        </div>
+                                    </div>
+                                    <div class="custom-check-box">
+                                        <div class="checked round cancel-check-btn">
+                                            <mat-checkbox class="form_field_checkbox"
+                                                [checked]="smsAlertWho['staff'].status == '1'"
+                                                (change)="fnSmsWho($event.checked, 'staff')"></mat-checkbox>
+                                            <p class="check-label">Staff</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="common-alert-card-two">
+                                <div class="main-lead-wrap">
+                                    <div class="w-100">
+                                        <h5>Reminder Lead Time</h5>
+                                        <p>Send a reminder to customers,prior to each appointments</p>
+                                    </div>
+
+
+                                    <div class="main-lead-time">
+                                        <div class="common-lead-select">
+
+                                            <mat-select class="form-control form-control-transparent"
+                                                (selectionChange)="fnSetSmsReminderTime($event)"
+                                                [(value)]="smsAlertDays">
+                                                <mat-option value="0">0 days</mat-option>
+                                                <mat-option value="1">1 days</mat-option>
+                                                <mat-option value="2">2 days</mat-option>
+                                                <mat-option value="3">3 days</mat-option>
+                                                <mat-option value="4">4 days</mat-option>
+                                                <mat-option value="5">5 days</mat-option>
+                                                <mat-option value="6">6 days</mat-option>
+                                                <mat-option value="7">7 days</mat-option>
+                                                <mat-option value="8">8 days</mat-option>
+                                                <mat-option value="9">9 days</mat-option>
+                                                <mat-option value="10">10 days</mat-option>
+                                                <mat-option value="11">11 days</mat-option>
+                                                <mat-option value="12">12 days</mat-option>
+                                                <mat-option value="13">13 days</mat-option>
+                                                <mat-option value="14">14 days</mat-option>
+                                                <mat-option value="15">15 days</mat-option>
+                                                <mat-option value="16">16 days</mat-option>
+                                                <mat-option value="17">17 days</mat-option>
+                                                <mat-option value="18">18 days</mat-option>
+                                                <mat-option value="19">19 days</mat-option>
+                                                <mat-option value="20">20 days</mat-option>
+                                                <mat-option value="21">21 days</mat-option>
+                                                <mat-option value="22">22 days</mat-option>
+                                                <mat-option value="23">23 days</mat-option>
+                                                <mat-option value="24">24 days</mat-option>
+                                                <mat-option value="25">25 days</mat-option>
+                                                <mat-option value="26">26 days</mat-option>
+                                                <mat-option value="27">27 days</mat-option>
+                                                <mat-option value="28">28 days</mat-option>
+                                                <mat-option value="29">29 days</mat-option>
+                                                <mat-option value="30">30 days</mat-option>
+                                            </mat-select>
+                                        </div>
+                                        <div class="common-lead-select">
+
+                                            <mat-select class="form-control form-control-transparent"
+                                                (selectionChange)="fnSetSmsReminderTime($event)"
+                                                [(value)]="smsAlertHours">
+                                                <mat-option value="0">0 Hours</mat-option>
+                                                <mat-option value="1">1 Hours</mat-option>
+                                                <mat-option value="2">2 Hours</mat-option>
+                                                <mat-option value="3">3 Hours</mat-option>
+                                                <mat-option value="4">4 Hours</mat-option>
+                                                <mat-option value="5">5 Hours</mat-option>
+                                                <mat-option value="6">6 Hours</mat-option>
+                                                <mat-option value="7">7 Hours</mat-option>
+                                                <mat-option value="8">8 Hours</mat-option>
+                                                <mat-option value="9">9 Hours</mat-option>
+                                                <mat-option value="10">10 Hours</mat-option>
+                                                <mat-option value="11">11 Hours</mat-option>
+                                                <mat-option value="12">12 Hours</mat-option>
+                                                <mat-option value="13">13 Hours</mat-option>
+                                                <mat-option value="14">14 Hours</mat-option>
+                                                <mat-option value="15">15 Hours</mat-option>
+                                                <mat-option value="16">16 Hours</mat-option>
+                                                <mat-option value="17">17 Hours</mat-option>
+                                                <mat-option value="18">18 Hours</mat-option>
+                                                <mat-option value="19">19 Hours</mat-option>
+                                                <mat-option value="20">20 Hours</mat-option>
+                                                <mat-option value="21">21 Hours</mat-option>
+                                                <mat-option value="22">22 Hours</mat-option>
+                                                <mat-option value="23">23 Hours</mat-option>
+                                            </mat-select>
+                                        </div>
+                                        <div class="common-lead-select">
+
+                                            <mat-select class="form-control form-control-transparent"
+                                                (selectionChange)="fnSetSmsReminderTime($event)"
+                                                [(value)]="smsAlertMinutes">
+                                                <mat-option value="0">0 Minutes</mat-option>
+                                                <mat-option value="1">1 Minutes</mat-option>
+                                                <mat-option value="2">2 Minutes</mat-option>
+                                                <mat-option value="3">3 Minutes</mat-option>
+                                                <mat-option value="4">4 Minutes</mat-option>
+                                                <mat-option value="5">5 Minutes</mat-option>
+                                                <mat-option value="6">6 Minutes</mat-option>
+                                                <mat-option value="7">7 Minutes</mat-option>
+                                                <mat-option value="8">8 Minutes</mat-option>
+                                                <mat-option value="9">9 Minutes</mat-option>
+                                                <mat-option value="10">10 Minutes</mat-option>
+                                                <mat-option value="11">11 Minutes</mat-option>
+                                                <mat-option value="12">12 Minutes</mat-option>
+                                                <mat-option value="13">13 Minutes</mat-option>
+                                                <mat-option value="14">14 Minutes</mat-option>
+                                                <mat-option value="15">15 Minutes</mat-option>
+                                                <mat-option value="16">16 Minutes</mat-option>
+                                                <mat-option value="17">17 Minutes</mat-option>
+                                                <mat-option value="18">18 Minutes</mat-option>
+                                                <mat-option value="19">19 Minutes</mat-option>
+                                                <mat-option value="20">20 Minutes</mat-option>
+                                                <mat-option value="21">21 Minutes</mat-option>
+                                                <mat-option value="22">22 Minutes</mat-option>
+                                                <mat-option value="23">23 Minutes</mat-option>
+                                                <mat-option value="24">24 Minutes</mat-option>
+                                                <mat-option value="25">25 Minutes</mat-option>
+                                                <mat-option value="26">26 Minutes</mat-option>
+                                                <mat-option value="27">27 Minutes</mat-option>
+                                                <mat-option value="28">28 Minutes</mat-option>
+                                                <mat-option value="29">29 Minutes</mat-option>
+                                                <mat-option value="30">30 Minutes</mat-option>
+                                                <mat-option value="31">31 Minutes</mat-option>
+                                                <mat-option value="32">32 Minutes</mat-option>
+                                                <mat-option value="33">33 Minutes</mat-option>
+                                                <mat-option value="34">34 Minutes</mat-option>
+                                                <mat-option value="35">35 Minutes</mat-option>
+                                                <mat-option value="36">36 Minutes</mat-option>
+                                                <mat-option value="37">37 Minutes</mat-option>
+                                                <mat-option value="38">38 Minutes</mat-option>
+                                                <mat-option value="39">39 Minutes</mat-option>
+                                                <mat-option value="40">40 Minutes</mat-option>
+                                                <mat-option value="41">41 Minutes</mat-option>
+                                                <mat-option value="42">42 Minutes</mat-option>
+                                                <mat-option value="43">43 Minutes</mat-option>
+                                                <mat-option value="44">44 Minutes</mat-option>
+                                                <mat-option value="45">45 Minutes</mat-option>
+                                                <mat-option value="46">46 Minutes</mat-option>
+                                                <mat-option value="47">47 Minutes</mat-option>
+                                                <mat-option value="48">48 Minutes</mat-option>
+                                                <mat-option value="49">49 Minutes</mat-option>
+                                                <mat-option value="50">50 Minutes</mat-option>
+                                                <mat-option value="51">51 Minutes</mat-option>
+                                                <mat-option value="52">52 Minutes</mat-option>
+                                                <mat-option value="53">53 Minutes</mat-option>
+                                                <mat-option value="54">54 Minutes</mat-option>
+                                                <mat-option value="55">55 Minutes</mat-option>
+                                                <mat-option value="56">56 Minutes</mat-option>
+                                                <mat-option value="57">57 Minutes</mat-option>
+                                                <mat-option value="58">58 Minutes</mat-option>
+                                                <mat-option value="59">59 Minutes</mat-option>
+                                            </mat-select>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <button mat-button class="sc-pink-btn my-3" (click)="fnSubmitSmsAlert()">Save</button>
+                            </div>
+
+                        </div>
+                    </mat-card>
+                    <h5 class="common-alert-heading"> Select SMS Gateway </h5>
+                    <mat-accordion class="common-gateway-according">
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <div class="d-flex">
+                                        <div>
+                                            <img src="/assets/images/admin/twilio.png" class="payment-image">
+                                        </div>
+                                        <div class="payment-toggle-btn">
+                                            <mat-slide-toggle *ngIf="twilioSettingValue"
+                                                [checked]="twilioSettingValue.status"
+                                                (change)="fnTwillioStatus($event.checked)" class=""></mat-slide-toggle>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="">Twilio SMS Gateway</p>
+                                    </div>
+                                </mat-panel-title>
+                                
+                            </mat-expansion-panel-header>
+                                <div class="main-account-details">
+                                        <div class="main-table-content main-cust-table-content">
+                                            <form [formGroup]="twilio">
+                                                <div class="common-gateway-form">
+                                                    <div class="form-group">
+                                                        <label class="payment-label">Account SID</label>
+                                                        <input formControlName="accountSID" class="form-control form-control-transparent"
+                                                            placeholder="" value="">
+                                                        <span class="w-100 error-wrap"
+                                                            *ngIf="twilio.get('accountSID').dirty || twilio.get('accountSID').touched">
+                                                            <small *ngIf="twilio.get('accountSID').hasError('required')"
+                                                                class="error">Account SID is required.</small>
+                                                        </span>
+                                                    </div>
+                                                    <div class="form-group">
+
+                                                        <label class="payment-label">Auth Token</label>
+
+                                                        <input formControlName="authToken" class="form-control form-control-transparent"
+                                                            placeholder="" value="">
+                                                        <span class="w-100 error-wrap"
+                                                            *ngIf="twilio.get('authToken').dirty || twilio.get('authToken').touched">
+                                                            <small *ngIf="twilio.get('authToken').hasError('required')"
+                                                                class="error">Auth token is required.</small>
+                                                        </span>
+
+
+                                                    </div>
+                                                    <div class="form-group">
+
+                                                        <label class="payment-label">Twilio Sender</label>
+
+                                                        <input formControlName="twilioSender" class="form-control form-control-transparent"
+                                                            placeholder="" value="">
+
+                                                        <span class="w-100 error-wrap"
+                                                            *ngIf="twilio.get('twilioSender').dirty || twilio.get('twilioSender').touched">
+                                                            <small
+                                                                *ngIf="twilio.get('twilioSender').hasError('required')"
+                                                                class="error">Twilio sender is required.</small>
+                                                        </span>
+                                                    </div>
+                                                    <div class="form-group mobile-form-control">
+
+                                                        <label class="payment-label">Admin Phone Number</label>
+                                                        <ngx-intl-tel-input class=""
+                                                            [preferredCountries]="preferredCountries"
+                                                            [enableAutoCountrySelect]="false" [searchCountryFlag]="true"
+                                                            [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                                                            [selectFirstCountry]="true"
+                                                            [selectedCountryISO]="selectedCountryISO" [maxLength]="15"
+                                                            [phoneValidation]="false"
+                                                            (mousedown)="fnPhoneMouceLeaveTwilio()"
+                                                            (keyup)="fnenterPhoneNumberTwilio()"
+                                                            [separateDialCode]="separateDialCode"
+                                                            formControlName="adminNumber" placeholder="Mobile">
+                                                        </ngx-intl-tel-input>
+                                                        <span class="" *ngIf="phoneNumberInvalidTwilio">
+                                                            <small *ngIf="phoneNumberInvalidTwilio == 'required'"
+                                                                class="error">Admin number is required.</small>
+                                                            <small *ngIf="phoneNumberInvalidTwilio == 'length'"
+                                                                class="error">Admin number should be 6 to 15
+                                                                digits long.</small>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <button mat-button class="sc-pink-btn my-3"
+                                                    (click)="fnSubmitTwillioSettings()">Save</button>
+                                            </form>
+                                        </div>
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                    <mat-accordion class="common-gateway-according">
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <div class="d-flex">
+                                        <div>
+                                            <img src="/assets/images/admin/nexmo_logo.png" class="payment-image">
+                                        </div>
+                                        <div class="payment-toggle-btn">
+                                            <mat-slide-toggle *ngIf="nexmoSettingValue" [checked]="nexmoSettingValue.status" (change)="fnNexmoStatus($event.checked)" class=""></mat-slide-toggle>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="">Nexmo SMS Gateway</p>
+                                    </div>
+                                </mat-panel-title>
+                                <mat-panel-description>
+
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+
+                            <!-- <div class="account-setting">
+                                <p class="mb-0 py-2 account-para">Nexmo Account Settings</p>
+                            </div> -->
+                            <div class="">
+                                <div class="main-account-details">
+                                    <div class="">
+                                        <div class="main-table-content main-cust-table-content">
+                                            <form [formGroup]="nexmo">
+                                                <div class="common-gateway-form">
+                                                    <div class="form-group">
+                                                                <label class="payment-label">API Key</label>
+                                                                    <input formControlName="api_key" class="form-control form-control-transparent"
+                                                                        placeholder="" value="">
+                                                        <span class="w-100 error-wrap"
+                                                            *ngIf="nexmo.get('api_key').dirty || nexmo.get('api_key').touched">
+                                                            <small *ngIf="nexmo.get('api_key').hasError('required')"
+                                                                class="error">API key is required.</small>
+                                                        </span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                                <label class="payment-label">API Secret</label>
+                                                                    <input formControlName="api_secret" class="form-control form-control-transparent"
+                                                                        placeholder="" value="">
+                                                            
+                                                       
+                                                        <span class="w-100 error-wrap"
+                                                            *ngIf="nexmo.get('api_secret').dirty || nexmo.get('api_secret').touched">
+                                                            <small *ngIf="nexmo.get('api_secret').hasError('required')"
+                                                                class="error">API secret is required.</small>
+                                                        </span>
+                                                    </div>
+                                                    <div class="form-group mobile-form-control">
+                                                                <label class="payment-label">Admin Phone Number</label>
+                                                                <ngx-intl-tel-input
+                                                                    class=""
+                                                                    [preferredCountries]="preferredCountries"
+                                                                    [enableAutoCountrySelect]="false"
+                                                                    [searchCountryFlag]="true"
+                                                                    [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                                                                    [selectFirstCountry]="true"
+                                                                    [selectedCountryISO]="selectedCountryISO"
+                                                                    [maxLength]="15" [phoneValidation]="false"
+                                                                    (mousedown)="fnPhoneMouceLeaveNexmo()"
+                                                                    (keyup)="fnenterPhoneNumberNexmo()"
+                                                                    [separateDialCode]="separateDialCode"
+                                                                    formControlName="adminNumber" placeholder="Mobile">
+                                                                </ngx-intl-tel-input>
+                                                                <span class="" *ngIf="phoneNumberInvalidNexmo">
+                                                                    <small *ngIf="phoneNumberInvalidNexmo == 'required'"
+                                                                        class="error">Admin number is required.</small>
+                                                                    <small *ngIf="phoneNumberInvalidNexmo == 'length'"
+                                                                        class="error">Admin number should be 6 to 15
+                                                                        digits long.</small>
+                                                                </span>
+
+                                                    </div>
+                                                </div>
+                                                <button mat-button class="sc-pink-btn my-3"
+                                                    (click)="fnSubmitNexmoSettings()">Save</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                    <mat-accordion class="common-gateway-according">
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <div class="d-flex">
+                                        <div>
+                                            <img src="/assets/images/admin/textlocal.png" class="textlocal-img">
+                                        </div>
+                                        <div class="payment-toggle-btn">
+                                            <mat-slide-toggle *ngIf="textLocalSettingValue"
+                                                [checked]="textLocalSettingValue.status"
+                                                (change)="fnTextLocalStatus($event.checked)" class="">
+                                            </mat-slide-toggle>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="">Text Local SMS Gateway</p>
+                                    </div>
+                                </mat-panel-title>
+                                <mat-panel-description>
+
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <!-- <div class="account-setting">
+                                <p class="mb-0 py-2 account-para">Text Local Account Settings</p>
+                            </div> -->
+                            <div class="">
+                                <div class="main-account-details">
+                                    <form [formGroup]="textLocal">
+                                        <div class="common-gateway-form">
+                                                        <div class="form-group">
+                                                                <label class="payment-label">API Key</label>
+                                                                    <input formControlName="apiKey" class="form-control form-control-transparent"
+                                                                        placeholder="" value="">
+                                                                        <span class="w-100 error-wrap"
+                                                                        *ngIf="textLocal.get('apiKey').dirty || textLocal.get('apiKey').touched">
+                                                                        <small *ngIf="textLocal.get('apiKey').hasError('required')"
+                                                                            class="error">Api key is required.</small>
+                                                                    </span>
+                                                            
+                                                        </div>
+                                                        <div class="form-group mobile-form-control">
+                                                                <label class="payment-label">Admin Number</label>
+                                                                <ngx-intl-tel-input
+                                                                    class=""
+                                                                    [preferredCountries]="preferredCountries1"
+                                                                    [enableAutoCountrySelect]="false"
+                                                                    [searchCountryFlag]="true"
+                                                                    [searchCountryField]="[SearchCountryField1.Iso2, SearchCountryField1.Name]"
+                                                                    [selectFirstCountry]="true"
+                                                                    [selectedCountryISO]="selectedCountryISO1"
+                                                                    [maxLength]="15" [phoneValidation]="false"
+                                                                    [separateDialCode]="separateDialCode1"
+                                                                    formControlName="adminNumber"
+                                                                    (mousedown)="fnPhoneMouceLeaveTxtLocal()"
+                                                                    (keyup)="fnenterPhoneNumberTxtLocal()"
+                                                                    placeholder="Mobile">
+                                                                </ngx-intl-tel-input>
+                                                                <span class="" *ngIf="phoneNumberInvalidTxtLocal">
+                                                                    <small
+                                                                        *ngIf="phoneNumberInvalidTxtLocal == 'required'"
+                                                                        class="error">Admin number is required.</small>
+                                                                    <small
+                                                                        *ngIf="phoneNumberInvalidTxtLocal == 'length'"
+                                                                        class="error">Admin number should be 6 to 15
+                                                                        digits long.</small>
+                                                                </span>
+                                                            </div>
+
+                                                <button mat-button class="sc-pink-btn my-3"
+                                                    (click)="fnSubmitTextLocalSetting()">Save</button>
+                                            
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+</mat-drawer-content>

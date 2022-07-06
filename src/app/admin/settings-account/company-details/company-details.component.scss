@@ -1,0 +1,206 @@
+@import "variables";
+.main-account-company-details {
+    
+    .company-details-profile-background {
+        .company-details-image {
+            border-radius: 100%;
+        }
+    }
+    .company-details-save-btn {
+        width: 100px;
+        height: 39px;
+        border-radius: 50px;
+        background-color: #1173f4;
+        color: white;
+    }
+}
+
+.company-action-btn {
+    margin-left: auto;
+    display: flex;
+}
+
+.company-cancel-btn {
+    width: 128px;
+    height: 37px;
+    border-radius: 5px;
+    margin-right: 7px;
+    background-color: #A1A1A1;
+    color: #fff;
+    margin-left: auto;
+}
+
+.company-save-btn {
+    width: 109px;
+    height: 39px;
+    border-radius: 5px;
+    background-color: #F04589;
+    color: white;
+}
+.account-statustoggle {
+    margin: 30px 0;
+}
+
+.business-cancel-btn {
+    width: 128px;
+    height: 37px;
+    border-radius: 7px;
+    margin-right: 7px;
+    background-color: #dddddd;
+    margin-left: auto;
+}
+
+
+/*Image Upload*/
+
+::ng-deep .file-upload {
+    background-color: #ffffff;
+    margin: 0 auto;
+    padding: 20px;
+    .image-upload-wrap {
+        margin-top: 20px;
+        border: 2px dashed #565657;
+        position: relative;
+        padding: 30px 0;
+        .fileuploadinput {
+            position: absolute;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            outline: none;
+            opacity: 0;
+            cursor: pointer;
+            margin-top: -30px;
+        }
+    }
+    .drag-text {
+        text-align: center;
+        h6 {
+            font-size: 18px;
+        }
+        h3 {
+            font-size: 14px;
+        }
+    }
+    .imgbtn {
+        margin: 15px auto;
+        display: table;
+        padding: 8px 16px;
+        border-radius: 50px;
+    }
+}
+
+
+.account-my-profile-img-wrap{
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+    justify-content: flex-start;
+    .profile-img-wrap{
+        width: 150px;
+        height: 150px;
+        background-color: #EAF7F6;
+        justify-content: center;
+        margin: 0 auto;
+        overflow: hidden;
+        border-radius: 5px; 
+        margin-right: 20px;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        .default-img{
+            width: 40px;
+        }
+    }
+    .img-upload-btns{
+        display: flex;
+        justify-content: center;
+        margin: 15px 0;
+        width: 190px;
+        flex-wrap: wrap;
+    }
+}
+
+ ::ng-deep .upload-preview-img {
+    max-width: 200px;
+    margin: 0 auto;
+    display: table;
+}
+
+#company_detail {
+    .setting-right-side-content {
+        .footer-save-container {
+            position: fixed;
+            bottom: 0;
+            width: calc(100% - 300px);
+            margin: 0;
+            right: 0;
+            box-shadow: 0 3px 17px rgb(0 168 155 / 25%), 0 4px 5px 0 rgb(0 168 155 / 25%) !important;
+            transition: all 0.4s;
+            .company-action-btn {
+                justify-content: flex-end;
+            }
+        }
+        &.short-content-area {
+            .footer-save-container {
+                width: calc(100% - 150px);
+            }
+        }
+    }
+}
+
+::ng-deep .account-statustoggle {
+    margin: 30px 0;
+    .mat-slide-toggle-label {
+        .mat-slide-toggle-content {
+            width: unset !important;
+        }
+        .mat-slide-toggle-bar {
+            order: 1;
+            margin-left: 10px;
+        }
+    }
+}
+
+@supports (-ms-ime-align:auto) {
+     ::ng-deep .company-zip-feild {
+        .mat-form-field-infix {
+            margin-bottom: 0px;
+        }
+    }
+}
+
+.custom-label {
+    margin-bottom: 0;
+    margin-top: 15px;
+    font-weight: 500;
+}
+
+::ng-deep .mobile-intel-input {
+    width: 100%;
+    .iti__selected-flag.dropdown-toggle {
+        background-color: transparent !important;
+    }
+    input {
+        border: 0px;
+        border-bottom: 1px solid #000;
+        border-radius: 0;
+        &:focus {
+            outline: 0px;
+            box-shadow: unset;
+        }
+    }
+}
+.right-business-col{
+    margin-top: 15px;
+}
+.business-description{
+    textarea{
+        height: 13.7em;
+    }
+}
+::ng-deep .business-img.mat-button[disabled][disabled]{
+    opacity: 0.6;
+    color: #fff;
+}

@@ -1,0 +1,21 @@
+<div class="modal-dialog modal-notify modal-info" role="document">
+    <div class="loader-main" *ngIf="isLoader">
+        <img src="../../../assets/images/sc-loader.svg">
+    </div>
+    <div class="modal-content">
+        <div class="modal-header modal-bcolor-primary">
+            <p class="heading lead mb-0 work-content">On The Way</p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onNoClick()">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body common-input">
+            <p class="h5 work-content">You are on the way to work</p>
+            <div class="form-group">
+                <label>Add Note</label>
+                <textarea class="form-control mb-2" [(ngModel)]="notes" placeholder="Enter note"></textarea>
+            </div>
+            <button class=" btn btn-primary addbtn" (click)="changeBookingStatus(booking_id, status)">Add Status</button>
+        </div>
+    </div>
+</div>

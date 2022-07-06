@@ -1,0 +1,974 @@
+<mat-drawer-content id="appearance" class="ml-0">
+    <div class="loader-main" *ngIf="isLoaderAdmin"><img src="../../../assets/images/sc-loader.svg" /></div>
+    <div class="left-side-menu setting-menu" [ngClass]="{ 'short-menu': settingSideMenuToggle === true }">
+        <div class="leftarrow-icon d-flex align-items-center">
+            <h6 class="mb-0">Resource Management</h6>
+            <span (click)="fnSettingMenuToggleSmall()" *ngIf="!settingSideMenuToggle" class="customer-drawer-leftarrow ml-auto pointer material-icons-outlined">arrow_circle_left</span>
+            <span (click)="fnSettingMenuToggleLarge()" *ngIf="settingSideMenuToggle" class="customer-drawer-leftarrow ml-auto pointer material-icons-outlined">arrow_circle_right</span>
+        </div>
+        <div routerLink="/admin/settings-resource" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/service.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/service-active.svg" />
+            </div>
+            <p>Services</p>
+        </div>
+        <div routerLink="/admin/settings-resource/staff" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/staff.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/staff-active.svg" />
+            </div>
+            <p>Staff</p>
+        </div>
+        <div routerLink="/admin/settings-resource/business-hours" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/business-hours.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/business-hours-active.svg" />
+            </div>
+            <p>Business Hours</p>
+        </div>
+        <div routerLink="/admin/settings-resource/postalcode" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/postal-code.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/postal-code-active.svg" />
+            </div>
+            <p>Postal Codes</p>
+        </div>
+        <h6 class="pt-3">Account</h6>
+        <div routerLink="/admin/settings-account/company-details" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/business-detail.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/business-detail-active.svg" />
+            </div>
+            <p>Business Details</p>
+        </div>
+        <h6 class="pt-3">Payment</h6>
+        <div routerLink="/admin/settings-payment/billing" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/billing.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/billing-active.svg" />
+            </div>
+            <p>Billing</p>
+        </div>
+        <div routerLink="/admin/settings-payment/payment-gateway" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/payment-gateway.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/payment-gateway-active.svg" />
+            </div>
+            <p>Payment Gateway</p>
+        </div>
+        <div routerLink="/admin/settings-payment/payment-rules" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/payment-rules.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/payment-rules-active.svg" />
+            </div>
+            <p>Payment Rules</p>
+        </div>
+        <h6 class="pt-3">General Setting</h6>
+        <div routerLink="/admin/settings-general/appearance" class="d-flex setting-menu-item setting-menu-active">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/appearance.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/appearance-active.svg" />
+            </div>
+            <p>Appearance</p>
+        </div>
+        <div routerLink="/admin/settings-general/booking-rules" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/booking-rules.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/booking-rules-active.svg" />
+            </div>
+            <p>Booking Rules</p>
+        </div>
+        <div routerLink="/admin/settings-general/alert-rules" class="d-flex setting-menu-item">
+            <div class="menu-icon">
+                <img class="normal" src="../../../../assets/images/admin/settings-menu/alert-rules.svg" />
+                <img class="colored" src="../../../../assets/images/admin/settings-menu/alert-rules-active.svg" />
+            </div>
+            <p>Alert Rules</p>
+        </div>
+    </div>
+    <div class="setting-right-side-content without-footer" [ngClass]="{ 'short-content-area': settingSideMenuToggle === true }">
+        <mat-tab-group [(selectedIndex)]="selectedtab" class="common-tab-group">
+            <!-- --------------------------------- Themes ---------------------------------- -->
+            <mat-tab label="Theme">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 text-center pt-5">
+                            <div class="col-3 d-inline-block m-3 theme-div theme-1" [ngClass]="{'theme-active':defaultTheme === '1'}">
+                                <div class="check-icon d-none">
+                                    <mat-icon>check</mat-icon>
+                                </div>
+                                <div class="p-2 theme-title">
+                                    Theme 1
+                                </div>
+                                <div *ngIf="defaultTheme !== '1'" class="theme-btn-div">
+                                    <div class="theme-btn-sub-div">
+                                        <button (click)="fnThemePreview('1')" class="btn preview-color mb-1"><i
+                                                class="fa fa-eye pr-2"></i>Preview</button>
+                                        <button (click)="fnChangeTheme('1')" class="btn set-default-color mt-1"><i
+                                                class="fa fa-check pr-2"></i>Set Default</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- <div class="col-3 d-inline-block m-3 theme-div theme-2" [ngClass]="{'theme-active':defaultTheme === '2'}">
+                                <div class="check-icon d-none">
+                                    <mat-icon>check</mat-icon>
+                                </div>
+                                <div class="p-2 theme-title">
+                                    Theme 2
+                                </div>
+                                <div *ngIf="defaultTheme !== '2'" class="theme-btn-div">
+                                    <div class="theme-btn-sub-div">
+                                        <button (click)="fnThemePreview('2')" class="btn preview-color mb-1"><i class="fa fa-eye pr-2"></i>Preview</button>
+                                        <button (click)="fnChangeTheme('2')" class="btn set-default-color mt-1"><i class="fa fa-check pr-2"></i>Set Default</button>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <div class="col-3 d-inline-block m-3 theme-div theme-3" [ngClass]="{'theme-active':defaultTheme === '3'}">
+                                <div class="check-icon d-none">
+                                    <mat-icon>check</mat-icon>
+                                </div>
+                                <div class=" p-2 theme-title">
+                                    Theme 2
+                                </div>
+                                <div *ngIf="defaultTheme !== '3'" class="theme-btn-div">
+                                    <div class="theme-btn-sub-div">
+                                        <button (click)="fnThemePreview('3')" class="btn preview-color mb-1"><i
+                                                class="fa fa-eye pr-2"></i>Preview</button>
+                                        <button (click)="fnChangeTheme('3')" class="btn set-default-color mt-1"><i
+                                                class="fa fa-check pr-2"></i>Set Default</button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-12 text-center p-3">
+                            <div class="col-3 d-inline-block m-3 theme-div theme-4" [ngClass]="{'theme-active':defaultTheme === '4'}">
+                                <div class="check-icon d-none">
+                                    <mat-icon>check</mat-icon>
+                                </div>
+                                <div class=" p-2 theme-title">
+                                    Theme 3
+                                </div>
+                                <div *ngIf="defaultTheme !== '4'" class="theme-btn-div">
+                                    <div class="theme-btn-sub-div">
+                                        <button (click)="fnThemePreview('4')" class="btn preview-color mb-1"><i
+                                                class="fa fa-eye pr-2"></i>Preview</button>
+                                        <button (click)="fnChangeTheme('4')" class="btn set-default-color mt-1"><i
+                                                class="fa fa-check pr-2"></i>Set Default</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-3 d-inline-block m-3 theme-div theme-5" [ngClass]="{'theme-active':defaultTheme === '5'}">
+                                <div class="check-icon d-none">
+                                    <mat-icon>check</mat-icon>
+                                </div>
+                                <div class="p-2 theme-title">
+                                    Theme 4
+                                </div>
+                                <div *ngIf="defaultTheme !== '5'" class="theme-btn-div">
+                                    <div class="theme-btn-sub-div">
+                                        <button (click)="fnThemePreview('5')" class="btn preview-color mb-1"><i
+                                                class="fa fa-eye pr-2"></i>Preview</button>
+                                        <button (click)="fnChangeTheme('5')" class="btn set-default-color mt-1"><i
+                                                class="fa fa-check pr-2"></i>Set Default</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-3 d-inline-block m-3 theme-div theme-6" [ngClass]="{'theme-active':defaultTheme === '6'}">
+                                <div class="check-icon d-none">
+                                    <mat-icon>check</mat-icon>
+                                </div>
+                                <div class="p-2 theme-title">
+                                    Theme 5
+                                </div>
+                                <div *ngIf="defaultTheme !== '6'" class="theme-btn-div">
+                                    <div class="theme-btn-sub-div">
+                                        <button (click)="fnThemePreview('6')" class="btn preview-color mb-1"><i
+                                                class="fa fa-eye pr-2"></i>Preview</button>
+                                        <button (click)="fnChangeTheme('6')" class="btn set-default-color mt-1"><i
+                                                class="fa fa-check pr-2"></i>Set Default</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+            <!-- --------------------------------- Getting Started ---------------------------------- -->
+            <mat-tab label="Getting Started">
+                <div>
+                    <div class="main-getting-content custom-content-wrap">
+                        <h5 class="mb-1 page-title">Embed Web Widget</h5>
+                        <p class="page-des">Click to Copy Code below script and paste it in your web page.</p>
+                        <!-- <mat-radio-group aria-label="Select an option">
+                        <mat-radio-bu   tton value="1">Script</mat-radio-button>
+                        <mat-radio-button value="2">Script with Autologin</mat-radio-button>
+                    </mat-radio-group> -->
+                        <h6 class="mt-4">To embed the widget on your website, follow these guidelines.</h6>
+                        <p class="page-des">1. Copy the code by simply clicking on the script once.</p>
+                        <p class="page-des">2. Go to your website's HTML file and paste in before the last
+                            < body>
+                                tag
+                        </p>
+                        <p class="page-des">3. Now, the users visiting those websites or applications can see the Appointment Widget. </p>
+                        <p class="page-des">4. If you are still unsure, send the code to someone to assist you with the configuration.
+                        </p>
+                    </div>
+                    <mat-card class="card-content">
+                        {{embededCode}}
+                        <!-- <iframe height="100%" width="100%" src="http://localhost:4200/booking?business_id=34"></iframe> -->
+                        <div *ngIf="isTextCopie==false">
+                            <button mat-button type="submit" (click)="copyEmbedCode(embededCode)" class="appearance-save-btn">Copy Code</button>
+                        </div>
+                        <div *ngIf="isTextCopie==true">
+                            <button mat-button type="submit" class="appearance-save-btn">
+                                <span class="material-icons-outlined">done</span> Copied </button>
+                        </div>
+                    </mat-card>
+                    <!-- <div>
+                        <button mat-button type="submit" (click)="copyEmbedCode(embededCode)" class="appearance-save-btn">Copy Code</button>
+                    </div> -->
+                </div>
+            </mat-tab>
+            <!-- --------------------------------- Appearance --------------------------------------- -->
+            <mat-tab label="Appearance">
+                <div class="row m-0 appearance-wrap">
+                    <div class="left-side appearance-side col-4">
+                        <div class="setup-widget">
+                            <label class="palate-main-title">
+                                <span>Set Up Booking Widget</span>
+                                <div class="btn-container">
+                                    <button mat-button (click)="fnCancelAppearance()" class="refresh-btn">
+                                        <mat-icon>refresh</mat-icon>
+                                    </button>
+                                    <button mat-button (click)="fnSaveAppearanceSettings()" class="widget-save-btn">
+                                        <!-- <mat-icon>save</mat-icon> -->
+                                        <img src="../../../../assets/Icon-save.svg" alt="Save">
+                                    </button>
+                                </div>
+                            </label>
+                            <div class="appearance-opt-container">
+                                <mat-accordion class="appearance-opts">
+                                    <mat-expansion-panel>
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                <label>Widget Background</label>
+                                            </mat-panel-title>
+                                        </mat-expansion-panel-header>
+                                        <div class="botton-options">
+                                            <div class="color-field d-flex ">
+                                                <label>Background Color</label>
+                                                <div class="colorpicker-wrap">
+                                                    <input [style.background]="appearanceObject.widgetBackground_backgroundColor" class="color_box" [(colorPicker)]="appearanceObject.widgetBackground_backgroundColor" (colorPickerChange)="onChangeAppearance($event)" />
+                                                </div>
+                                            </div>
+                                            <div class="image-field">
+                                                <label class="w-100 mb-2">Add Background Image</label>
+                                                <button mat-button (click)="uploadWidgetBGImage()" class="sc-pink-btn w-100">Upload Image</button>
+                                            </div>
+                                            <div class="uploaded-image" *ngIf="appearanceObject.widgetBackground_backgroundImage && appearanceObject.widgetBackground_backgroundImage != ''">
+                                                <img [src]="appearanceObject.widgetBackground_backgroundImage" />
+                                                <button mat-button (click)="removeWidgetBGImage()" class="sc-pink-btn w-100">Remove Image</button>
+                                            </div>
+                                        </div>
+                                    </mat-expansion-panel>
+                                </mat-accordion>
+                                <mat-accordion class="appearance-opts">
+                                    <mat-expansion-panel>
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                <label>Widget Foreground</label>
+                                            </mat-panel-title>
+                                        </mat-expansion-panel-header>
+                                        <div class="botton-options">
+                                            <div class="color-field d-flex ">
+                                                <label>Background Color</label>
+                                                <div class="colorpicker-wrap">
+                                                    <input [style.background]="appearanceObject.widgetForeGround_backgroundColor" class="color_box" [(colorPicker)]="appearanceObject.widgetForeGround_backgroundColor" (colorPickerChange)="onChangeAppearance('forground')" />
+                                                </div>
+                                            </div>
+                                            <div class="color-field d-flex ">
+                                                <label>Shadow Color <mat-slide-toggle
+                                                        [checked]="appearanceObject.widgetForeGround_isShadow"
+                                                        (change)="onToggleChange($event,'foreground_shadow')">
+                                                    </mat-slide-toggle>
+                                                </label>
+                                                <div class="colorpicker-wrap">
+                                                    <input [style.background]="appearanceObject.widgetForeGround_shadowColor" class="color_box" [(colorPicker)]="appearanceObject.widgetForeGround_shadowColor" (colorPickerChange)="onChangeAppearance($event)" />
+                                                </div>
+                                            </div>
+                                            <div class="color-field d-flex ">
+                                                <label>Border Color
+                                                    <mat-slide-toggle
+                                                        [checked]="appearanceObject.widgetForeGround_isBorder"
+                                                        (change)="onToggleChange($event,'foreground_border')">
+                                                    </mat-slide-toggle>
+                                                </label>
+                                                <div class="colorpicker-wrap">
+                                                    <input [style.background]="appearanceObject.widgetForeGround_borderColor" class="color_box" [(colorPicker)]="appearanceObject.widgetForeGround_borderColor" (colorPickerChange)="onChangeAppearance($event)" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </mat-expansion-panel>
+                                </mat-accordion>
+                                <mat-accordion class="appearance-opts">
+                                    <mat-expansion-panel>
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                <label>Widget Store Details</label>
+                                            </mat-panel-title>
+                                        </mat-expansion-panel-header>
+                                        <div class="botton-options">
+                                            <div class="toggle-field d-flex ">
+                                                <label>Show Store Logo</label>
+                                                <div class="right-toggle-btn">
+                                                    <mat-slide-toggle [checked]="appearanceObject.widgetStoreDetails_showStoreLogo" (change)="onToggleChange($event,'store_logo')">
+                                                    </mat-slide-toggle>
+                                                </div>
+                                            </div>
+                                            <div class="toggle-field d-flex ">
+                                                <label>Show Store Name</label>
+                                                <div class="right-toggle-btn">
+                                                    <mat-slide-toggle [checked]="appearanceObject.widgetStoreDetails_showStoreName" (change)="onToggleChange($event,'store_name')">
+                                                    </mat-slide-toggle>
+                                                </div>
+                                            </div>
+                                            <div class="toggle-field d-flex ">
+                                                <label>Show Store Address</label>
+                                                <div class="right-toggle-btn">
+                                                    <mat-slide-toggle [checked]="appearanceObject.widgetStoreDetails_showStoreAddress" (change)="onToggleChange($event,'store_address')">
+                                                    </mat-slide-toggle>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </mat-expansion-panel>
+                                </mat-accordion>
+                                <mat-accordion class="appearance-opts">
+                                    <mat-expansion-panel>
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                <label>Widget Primary Text</label>
+                                            </mat-panel-title>
+                                        </mat-expansion-panel-header>
+                                        <div class="botton-options">
+                                            <div class="image-field">
+                                                <label class="w-100 mb-2">Text Font</label>
+                                                <mat-select class="form-control form-control-transparent" (selectionChange)="fnChangeFont($event,'primary_font')" [(ngModel)]="appearanceObject.widgetPrimaryText_font">
+                                                    <mat-option value="Poppins, sans-serif">Poppins</mat-option>
+                                                    <mat-option value="Roboto, sans-serif">Roboto</mat-option>
+                                                    <mat-option value="'Cairo', sans-serif">Cairo</mat-option>
+                                                    <mat-option value="'Dosis', sans-serif">Dosis</mat-option>
+                                                    <mat-option value="'Fira Sans', sans-serif">Fira Sans</mat-option>
+                                                    <mat-option value="Lato, sans-serif">Lato</mat-option>
+                                                    <mat-option value="Montserrat, sans-serif">Montserrat</mat-option>
+                                                    <mat-option value="Open Sans, sans-serif">Open Sans</mat-option>
+                                                    <mat-option value="Quicksand, sans-serif">Quicksand</mat-option>
+                                                    <mat-option value="Raleway, sans-serif">Raleway</mat-option>
+                                                    <mat-option value="Ubuntu, sans-serif">Ubuntu</mat-option>
+                                                </mat-select>
+                                            </div>
+                                            <div class="color-field d-flex ">
+                                                <label>Text Color</label>
+                                                <div class="colorpicker-wrap">
+                                                    <input [style.background]="appearanceObject.widgetPrimaryText_color" class="color_box" [(colorPicker)]="appearanceObject.widgetPrimaryText_color" (colorPickerChange)="onChangeAppearance($event)" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </mat-expansion-panel>
+                                </mat-accordion>
+                                <mat-accordion class="appearance-opts">
+                                    <mat-expansion-panel>
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                <label>Widget Secondary Text</label>
+                                            </mat-panel-title>
+                                        </mat-expansion-panel-header>
+                                        <div class="botton-options">
+                                            <div class="image-field">
+                                                <label class="w-100 mb-2">Text Font</label>
+                                                <mat-select class="form-control form-control-transparent" (selectionChange)="fnChangeFont($event,'secondary_font')" [(ngModel)]="appearanceObject.widgetSecondaryText_font">
+                                                    <mat-option value="Poppins, sans-serif">Poppins</mat-option>
+                                                    <mat-option value="Roboto, sans-serif">Roboto</mat-option>
+                                                    <mat-option value="'Cairo', sans-serif">Cairo</mat-option>
+                                                    <mat-option value="'Dosis', sans-serif">Dosis</mat-option>
+                                                    <mat-option value="'Fira Sans', sans-serif">Fira Sans</mat-option>
+                                                    <mat-option value="Lato, sans-serif">Lato</mat-option>
+                                                    <mat-option value="Montserrat, sans-serif">Montserrat</mat-option>
+                                                    <mat-option value="Open Sans, sans-serif">Open Sans</mat-option>
+                                                    <mat-option value="Quicksand, sans-serif">Quicksand</mat-option>
+                                                    <mat-option value="Raleway, sans-serif">Raleway</mat-option>
+                                                    <mat-option value="Ubuntu, sans-serif">Ubuntu</mat-option>
+                                                </mat-select>
+                                            </div>
+                                            <div class="color-field d-flex ">
+                                                <label>Text Color</label>
+                                                <div class="colorpicker-wrap">
+                                                    <input [style.background]="appearanceObject.widgetSecondaryText_color" class="color_box" [(colorPicker)]="appearanceObject.widgetSecondaryText_color" (colorPickerChange)="onChangeAppearance($event)" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </mat-expansion-panel>
+                                </mat-accordion>
+                                <mat-accordion class="appearance-opts">
+                                    <mat-expansion-panel>
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                <label>Widget Button</label>
+                                            </mat-panel-title>
+                                        </mat-expansion-panel-header>
+                                        <div class="botton-options">
+                                            <div class="image-field">
+                                                <label class="w-100 mb-2">Button Text Font</label>
+                                                <mat-select class="form-control form-control-transparent" (selectionChange)="fnChangeFont($event,'button_font')" [(ngModel)]="appearanceObject.widgetButton_font">
+                                                    <mat-option value="Poppins, sans-serif">Poppins</mat-option>
+                                                    <mat-option value="Roboto, sans-serif">Roboto</mat-option>
+                                                    <mat-option value="'Cairo', sans-serif">Cairo</mat-option>
+                                                    <mat-option value="'Dosis', sans-serif">Dosis</mat-option>
+                                                    <mat-option value="'Fira Sans', sans-serif">Fira Sans</mat-option>
+                                                    <mat-option value="Lato, sans-serif">Lato</mat-option>
+                                                    <mat-option value="Montserrat, sans-serif">Montserrat</mat-option>
+                                                    <mat-option value="Open Sans, sans-serif">Open Sans</mat-option>
+                                                    <mat-option value="Quicksand, sans-serif">Quicksand</mat-option>
+                                                    <mat-option value="Raleway, sans-serif">Raleway</mat-option>
+                                                    <mat-option value="Ubuntu, sans-serif">Ubuntu</mat-option>
+                                                </mat-select>
+                                            </div>
+                                            <div class="color-field d-flex ">
+                                                <label>Button Text Color</label>
+                                                <div class="colorpicker-wrap">
+                                                    <input [style.background]="appearanceObject.widgetButton_textColor" class="color_box" [(colorPicker)]="appearanceObject.widgetButton_textColor" (colorPickerChange)="onChangeAppearance($event)" />
+                                                </div>
+                                            </div>
+                                            <div class="color-field d-flex ">
+                                                <label>Button Color</label>
+                                                <div class="colorpicker-wrap">
+                                                    <input [style.background]="appearanceObject.widgetButton_backgroundColor" class="color_box" [(colorPicker)]="appearanceObject.widgetButton_backgroundColor" (colorPickerChange)="onChangeAppearance($event)" />
+                                                </div>
+                                            </div>
+                                            <div class="btn-style-field d-flex ">
+                                                <label>Button Style</label>
+                                                <div class="button-styles">
+                                                    <button mat-raised-button (click)="activateBTN(1)" [ngClass]="{'activated' : appearanceObject.widgetButton_style == 1}" class="btn-styles btn-style-1">Button 1</button>
+                                                    <button mat-raised-button (click)="activateBTN(2)" [ngClass]="{'activated' : appearanceObject.widgetButton_style == 2}" class="btn-styles btn-style-2">Button 1</button>
+                                                    <button mat-raised-button (click)="activateBTN(3)" [ngClass]="{'activated' : appearanceObject.widgetButton_style == 3}" class="btn-styles btn-style-3">Button 1</button>
+                                                </div>
+                                            </div>
+                                            <div class="color-field d-flex ">
+                                                <label>Button Border Color
+                                                    <mat-slide-toggle 
+                                                        [checked]="appearanceObject.widgetButton_isBorder"
+                                                        (change)="onToggleChange($event,'button_border')">
+                                                    </mat-slide-toggle>
+                                                </label>
+                                                <div class="colorpicker-wrap">
+                                                    <input [style.background]="appearanceObject.widgetButton_borderColor" class="color_box" [(colorPicker)]="appearanceObject.widgetButton_borderColor" (colorPickerChange)="onChangeAppearance($event)" />
+                                                </div>
+                                            </div>
+                                            <div class="color-field d-flex ">
+                                                <label>Button Shadow Color
+                                                    <mat-slide-toggle 
+                                                        [checked]="appearanceObject.widgetButton_isShadow"
+                                                        (change)="onToggleChange($event,'button_shadow')">
+                                                    </mat-slide-toggle>
+                                                </label>
+                                                <div class="colorpicker-wrap">
+                                                    <input [style.background]="appearanceObject.widgetButton_shadowColor" class="color_box" [(colorPicker)]="appearanceObject.widgetButton_shadowColor" (colorPickerChange)="onChangeAppearance($event)" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </mat-expansion-panel>
+                                </mat-accordion>
+                                <mat-accordion class="appearance-opts">
+                                    <mat-expansion-panel>
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                <label>Widget Button Hover
+
+                                                    <mat-slide-toggle 
+                                                        [checked]="appearanceObject.widgetButtonHover_isHover"
+                                                        (change)="onToggleChange($event,'button_hover')">
+                                                    </mat-slide-toggle>
+                                                </label>
+                                            </mat-panel-title>
+                                        </mat-expansion-panel-header>
+                                        <div class="botton-options">
+                                            <div class="image-field">
+                                                <label class="w-100 mb-2">Button Text Font</label>
+                                                <mat-select class="form-control form-control-transparent" (selectionChange)="fnChangeFont($event,'button_hover_font')" [(ngModel)]="appearanceObject.widgetButtonHover_font">
+                                                    <mat-option value="Poppins, sans-serif">Poppins</mat-option>
+                                                    <mat-option value="Roboto, sans-serif">Roboto</mat-option>
+                                                    <mat-option value="'Cairo', sans-serif">Cairo</mat-option>
+                                                    <mat-option value="'Dosis', sans-serif">Dosis</mat-option>
+                                                    <mat-option value="'Fira Sans', sans-serif">Fira Sans</mat-option>
+                                                    <mat-option value="Lato, sans-serif">Lato</mat-option>
+                                                    <mat-option value="Montserrat, sans-serif">Montserrat</mat-option>
+                                                    <mat-option value="Open Sans, sans-serif">Open Sans</mat-option>
+                                                    <mat-option value="Quicksand, sans-serif">Quicksand</mat-option>
+                                                    <mat-option value="Raleway, sans-serif">Raleway</mat-option>
+                                                    <mat-option value="Ubuntu, sans-serif">Ubuntu</mat-option>
+                                                </mat-select>
+                                            </div>
+                                            <div class="color-field d-flex ">
+                                                <label>Button Text Color</label>
+                                                <div class="colorpicker-wrap">
+                                                    <input [style.background]="appearanceObject.widgetButtonHover_textColor" class="color_box" [(colorPicker)]="appearanceObject.widgetButtonHover_textColor" (colorPickerChange)="onChangeAppearance($event)" />
+                                                </div>
+                                            </div>
+                                            <div class="color-field d-flex ">
+                                                <label>Button Color</label>
+                                                <div class="colorpicker-wrap">
+                                                    <input [style.background]="appearanceObject.widgetButtonHover_backgroundColor" class="color_box" [(colorPicker)]="appearanceObject.widgetButtonHover_backgroundColor" (colorPickerChange)="onChangeAppearance($event)" />
+                                                </div>
+                                            </div>
+                                            <div class="color-field d-flex ">
+                                                <label>Button Border Color
+                                                    <mat-slide-toggle
+                                                        [checked]="appearanceObject.widgetButtonHover_isBorder"
+                                                        (change)="onToggleChange($event,'button_hover_border')">
+                                                    </mat-slide-toggle>
+                                                </label>
+                                                <div class="colorpicker-wrap">
+                                                    <input [style.background]="appearanceObject.widgetButtonHover_borderColor" class="color_box" [(colorPicker)]="appearanceObject.widgetButtonHover_borderColor" (colorPickerChange)="onChangeAppearance($event)" />
+                                                </div>
+                                            </div>
+                                            <div class="color-field d-flex ">
+                                                <label>Button Shadow Color
+                                                    <mat-slide-toggle
+                                                        [checked]="appearanceObject.widgetButtonHover_isShadow"
+                                                        (change)="onToggleChange($event,'button_hover_shadow')">
+                                                    </mat-slide-toggle>
+                                                </label>
+                                                <div class="colorpicker-wrap">
+                                                    <input [style.background]="appearanceObject.widgetButtonHover_shadowColor" class="color_box" [(colorPicker)]="appearanceObject.widgetButtonHover_shadowColor" (colorPickerChange)="onChangeAppearance($event)" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </mat-expansion-panel>
+                                </mat-accordion>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="preview_container" class="right-side pr-0 py-3 appearance-side col-8">
+                        <!-- <div class="main-theme-box widgetBackground_backgroundColor" [ngStyle]="{'background-image': 'url(' + appearanceObject.widgetBackground_backgroundImage + ')'}">
+                            <div id="theme_1" class="theme-main widgetForeGround_backgroundColor " [ngClass]="{'widgetForeGround_shadowColor':appearanceObject.widgetForeGround_isShadow, 'widgetForeGround_borderColor' :appearanceObject.widgetForeGround_isBorder}">
+                                <div class="card-wrap main-front-container">
+                                    <div class="theme-card">
+                                        <div class="step-wrapper">
+                                            <div class="theme-header widgetHeader_color">
+                                                <div class="store-detail">
+                                                    <div class="b-logo-container" *ngIf="appearanceObject.widgetStoreDetails_showStoreLogo">
+                                                        <img src="../../assets/images/dummy-logo-black.svg" />
+                                                    </div>
+                                                    <h3 *ngIf="appearanceObject.widgetStoreDetails_showStoreName" class="widgetPrimaryText_font widgetPrimaryText_color">Store Name</h3>
+                                                    <p *ngIf="appearanceObject.widgetStoreDetails_showStoreAddress" class="widgetPrimaryText_font widgetPrimaryText_color">52 Bates Brothers Road, Columbus - Ohio</p>
+                                                </div>
+
+                                                <div class="search-box widgetPrimaryText_font widgetPrimaryText_color">
+                                                    <mat-icon>search</mat-icon>
+                                                    <input type="text" placeholder="Search service" class="form-control" />
+                                                </div>
+                                                <div class="btn-box d-flex">
+                                                    <button mat-button class="sc-black-btn has-icon widgetButton_textColor widgetButton_backgroundColor widgetButton_font" [ngClass]="{'widgetButton_borderColor':appearanceObject.widgetButton_isBorder, 'widgetButton_shadowColor' :appearanceObject.widgetButton_isShadow, 'btn_style_1' : appearanceObject.widgetButton_style==1, 'btn_style_2' : appearanceObject.widgetButton_style==2, 'btn_style_3' : appearanceObject.widgetButton_style==3, 'widgetButtonHover_textColor  widgetButtonHover_backgroundColor widgetButtonHover_font':appearanceObject.widgetButtonHover_isHover, 'widgetButtonHover_borderColor':appearanceObject.widgetButtonHover_isHover && appearanceObject.widgetButtonHover_isBorder, 'widgetButtonHover_shadowColor':appearanceObject.widgetButtonHover_isHover && appearanceObject.widgetButtonHover_isShadow}">
+                                                        <mat-icon class="btn-icon">perm_identity</mat-icon>
+                                                        Login
+                                                    </button>
+                                                    <button matBadge="2" matBadgePosition="before" mat-button class="cart-btn">
+                                                        <svg id="Icon_feather-shopping-cart"
+                                                            data-name="Icon feather-shopping-cart"
+                                                            xmlns="http://www.w3.org/2000/svg" width="36" height="34.5"
+                                                            viewBox="0 0 36
+                                                            34.5">
+                                                            <path id="Path_188" data-name="Path 188"
+                                                                d="M15,31.5A1.5,1.5,0,1,1,13.5,30,1.5,1.5,0,0,1,15,31.5Z"
+                                                                fill="none" stroke="#fff" stroke-linecap="round"
+                                                                stroke-linejoin="round" stroke-width="3" />
+                                                            <path id="Path_189" data-name="Path 189"
+                                                                d="M31.5,31.5A1.5,1.5,0,1,1,30,30,1.5,1.5,0,0,1,31.5,31.5Z"
+                                                                fill="none" stroke="#fff" stroke-linecap="round"
+                                                                stroke-linejoin="round" stroke-width="3" />
+                                                            <path id="Path_190" data-name="Path 190"
+                                                                d="M1.5,1.5h6l4.02,20.085a3,3,0,0,0,3,2.415H29.1a3,3,0,0,0,3-2.415L34.5,9H9"
+                                                                fill="none" stroke="#fff" stroke-linecap="round"
+                                                                stroke-linejoin="round" stroke-width="3" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div id="service_list" class="main-step step_1">
+                                                <div class="theme-card-title col-lg-12 col-sm-12 col-12 d-flex align-items-center p-0">
+                                                    <div class="theme-title-inner d-flex align-items-center">
+                                                        <h3 class="step-title mb-0 widgetPrimaryText_font widgetPrimaryText_color">Select Category </h3>
+                                                        <label class="service-link ml-4 mb-0">Check all services</label>
+                                                    </div>
+                                                    <div class="store-selector ml-auto for-desktop">
+                                                        <label class="mb-0 widgetPrimaryText_font widgetPrimaryText_color">Store Location</label>
+                                                        <mat-select name="storelocation">
+                                                            <mat-option value="Malad East ">Malad East</mat-option>
+                                                        </mat-select>
+                                                        <img class="location-icon" src="../../assets/images/material-location-on.svg" alt="location">
+                                                    </div>
+                                                </div>
+                                                <div class="theme-card-content">
+                                                    <div class="service-list">
+                                                        <label class="col-12 single-cat-main mb-0">
+                                                            <div class="single-service">
+                                                                <div class="service-img-main">
+                                                                    <img class="service-img"
+                                                                        src="https://api.schedulic.com/category-images/668447687_test.png" />
+                                                                </div>
+                                                                <div class="cat-content">
+                                                                    <h3 class="cat-title mb-2 widgetPrimaryText_font widgetPrimaryText_color">Hair Style<span
+                                                                            class="hours-wrap widgetSecondaryText_font widgetSecondaryText_color">1 hr</span></h3>
+                                                                    <p class="widgetSecondaryText_font widgetSecondaryText_color">Dess</p>
+                                                                </div>
+                                                                <div class="select-btn">
+                                                                    <button mat-button
+                                                                        class="sc-bordered-btn w-100 widgetButton_textColor widgetButton_backgroundColor widgetButton_font" [ngClass]="{'widgetButton_borderColor':appearanceObject.widgetButton_isBorder, 'widgetButton_shadowColor' :appearanceObject.widgetButton_isShadow, 'btn_style_1' : appearanceObject.widgetButton_style==1, 'btn_style_2' : appearanceObject.widgetButton_style==2, 'btn_style_3' : appearanceObject.widgetButton_style==3, 'widgetButtonHover_textColor widgetButtonHover_backgroundColor widgetButtonHover_font':appearanceObject.widgetButtonHover_isHover, 'widgetButtonHover_borderColor':appearanceObject.widgetButtonHover_isHover && appearanceObject.widgetButtonHover_isBorder, 'widgetButtonHover_shadowColor':appearanceObject.widgetButtonHover_isHover && appearanceObject.widgetButtonHover_isShadow}">Select</button>
+                                                                </div>
+                                                            </div>
+                                                        </label>
+                                                        <label class="col-12 single-cat-main mb-0">
+                                                            <div class="single-service">
+                                                                <div class="service-img-main">
+                                                                    <img class="service-img"
+                                                                        src="https://api.schedulic.com/category-images/668447687_test.png" />
+                                                                </div>
+                                                                <div class="cat-content">
+                                                                    <h3 class="cat-title mb-2 widgetPrimaryText_font widgetPrimaryText_color">Hair Style<span
+                                                                            class="hours-wrap widgetSecondaryText_font widgetSecondaryText_color">1 hr</span></h3>
+                                                                    <p class="widgetSecondaryText_font widgetSecondaryText_color">Dess</p>
+                                                                </div>
+                                                                <div class="select-btn">
+                                                                    <button mat-button
+                                                                        class="sc-bordered-btn w-100 widgetButton_textColor widgetButton_backgroundColor widgetButton_font" [ngClass]="{'widgetButton_borderColor':appearanceObject.widgetButton_isBorder, 'widgetButton_shadowColor' :appearanceObject.widgetButton_isShadow, 'btn_style_1' : appearanceObject.widgetButton_style==1, 'btn_style_2' : appearanceObject.widgetButton_style==2, 'btn_style_3' : appearanceObject.widgetButton_style==3, 'widgetButtonHover_textColor  widgetButtonHover_backgroundColor widgetButtonHover_font':appearanceObject.widgetButtonHover_isHover, 'widgetButtonHover_borderColor':appearanceObject.widgetButtonHover_isHover && appearanceObject.widgetButtonHover_isBorder, 'widgetButtonHover_shadowColor':appearanceObject.widgetButtonHover_isHover && appearanceObject.widgetButtonHover_isShadow}">Select</button>
+                                                                </div>
+                                                            </div>
+                                                        </label>
+                                                        <label class="col-12 single-cat-main mb-0">
+                                                            <div class="single-service">
+                                                                <div class="cat-content without-logo">
+                                                                    <h3 class="cat-title mb-2 widgetPrimaryText_font widgetPrimaryText_color">Hair Style<span
+                                                                            class="hours-wrap widgetSecondaryText_font widgetSecondaryText_color">1 hr</span></h3>
+                                                                    <p class="widgetSecondaryText_font widgetSecondaryText_color">Dess</p>
+                                                                </div>
+                                                                <div class="select-btn">
+                                                                    <button mat-button
+                                                                        class="sc-bordered-btn w-100 widgetButton_textColor widgetButton_backgroundColor widgetButton_font" [ngClass]="{'widgetButton_borderColor':appearanceObject.widgetButton_isBorder, 'widgetButton_shadowColor' :appearanceObject.widgetButton_isShadow, 'btn_style_1' : appearanceObject.widgetButton_style==1, 'btn_style_2' : appearanceObject.widgetButton_style==2, 'btn_style_3' : appearanceObject.widgetButton_style==3, 'widgetButtonHover_textColor  widgetButtonHover_backgroundColor widgetButtonHover_font':appearanceObject.widgetButtonHover_isHover, 'widgetButtonHover_borderColor':appearanceObject.widgetButtonHover_isHover && appearanceObject.widgetButtonHover_isBorder, 'widgetButtonHover_shadowColor':appearanceObject.widgetButtonHover_isHover && appearanceObject.widgetButtonHover_isShadow}">Select</button>
+                                                                </div>
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <p [innerHtml]="embededCodePreview"></p>
+                    </div>
+                </div>
+            </mat-tab>
+            <mat-tab label="Form Setting">
+                <mat-card class="main-form-setting-content common-form-setting-wrap">
+                    <div class="top-heading-wrap">
+                        <div>
+                            <h5>Contact Fields</h5>
+                            <p>Select which form field will show on your booking page.</p>
+                        </div>
+
+                        <div class="contact-field-toggle">
+                            <mat-slide-toggle (change)="fnChangeContactFormStatus($event.checked)" [checked]="formArr['contact_field_status']"></mat-slide-toggle>
+                        </div>
+                    </div>
+
+                    <div class="form-setting-table" *ngIf="formArr['contact_field_status']">
+                        <div class="main-table-content main-cust-table-content">
+
+                            <div class="content" class="form-setting-list row">
+                                <div class="col-3">
+                                    <div class="common-check-wrap">
+                                        <div class="checked round">
+                                            <p class="check-label">Name</p>
+                                            <mat-slide-toggle (change)="fnChangeFieldStatus($event.checked,'nameField')" class="form_field_checkbox" [checked]="formArr['nameField'].status=='1'" [disabled]="true">
+                                            </mat-slide-toggle>
+                                        </div>
+                                        <div class="" *ngIf="formArr['nameField'].status=='1'">
+                                            <mat-checkbox (change)="fnChangeRequiredStatus($event.checked,'nameField')" [checked]="formArr['nameField'].required=='1'" [disabled]="true">
+                                                Required</mat-checkbox>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="common-check-wrap">
+                                        <div class="checked round">
+                                            <p class="check-label">Number</p>
+                                            <mat-slide-toggle (change)="fnChangeFieldStatus($event.checked,'numberField')" class="form_field_checkbox" [checked]="formArr['numberField'].status=='1'" [disabled]="true">
+                                            </mat-slide-toggle>
+
+                                        </div>
+
+                                        <div class="" *ngIf="formArr['numberField'].status=='1'">
+                                            <div>
+                                                <mat-checkbox (change)="fnChangeRequiredStatus($event.checked,'numberField')" [checked]="formArr['numberField'].required=='1'" [disabled]="true">
+                                                    Required</mat-checkbox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="common-check-wrap">
+                                        <div class="checked round">
+                                            <p class="check-label">Email</p>
+                                            <mat-slide-toggle (change)="fnChangeFieldStatus($event.checked,'emailField')" class="form_field_checkbox" [checked]="formArr['emailField'].status=='1'" [disabled]="true">
+                                            </mat-slide-toggle>
+
+                                        </div>
+
+                                        <div class="" *ngIf="formArr['emailField'].status=='1'">
+                                            <div>
+                                                <mat-checkbox (change)="fnChangeRequiredStatus($event.checked,'emailField')" [checked]="formArr['emailField'].required=='1'" [disabled]="true">
+                                                    Required</mat-checkbox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="common-check-wrap">
+                                        <div class="checked round">
+                                            <p class="check-label">Address</p>
+                                            <mat-slide-toggle (change)="fnChangeFieldStatus($event.checked,'addressField')" class="form_field_checkbox" [checked]="formArr['addressField'].status=='1'"></mat-slide-toggle>
+
+                                        </div>
+
+                                        <div class="" *ngIf="formArr['addressField'].status=='1'">
+                                            <div>
+                                                <mat-checkbox (change)="fnChangeRequiredStatus($event.checked,'addressField')" [checked]="formArr['addressField'].required=='1'">Required
+                                                </mat-checkbox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button mat-button appearance="fill" class="sc-pink-btn pink-btn-md mt-3" (click)="fnFormSetting()">Save</button>
+                        </div>
+                    </div>
+                </mat-card>
+
+                <!-- <mat-card class="save-cencel-footer">
+                    <div class="d-flex py-2 save-footer-btn">
+                        <button mat-button (click)="fnCancelAppearance()" class="sc-grey-btn mr-2">Cancel</button>
+                        <button mat-button class="sc-pink-btn mr-2" (click)="fnFormSetting()">Save</button>
+                    </div>
+                </mat-card> -->
+            </mat-tab>
+            <!-- ------------------------------Buttons & Links -------------------------------------- -->
+            <mat-tab label="Buttons & Links">
+                <mat-card class="main-form-setting-content content-btn-links-wrap">
+                    <h5 class="page-title">Buttons and Links</h5>
+                    <p class="page-des">Promote your pages (Facebook & Twitter) with buttons for booking appointments. We will provide you with a unique booking link that you can share online with customers on social media.</p>
+                </mat-card>
+
+                <mat-card class="main-form-setting-content service-boking-text-wrap">
+
+                    <div class="container p-3 bg-wrap rounded">
+                        <div class="row">
+                            <div class="col-6">
+                                <h5>Service Booking link</h5>
+                            </div>
+                            <!-- <div class="col-6 text-right"><button class="btn btn-editlink">Edit Link Setting</button></div> -->
+
+                            <div class="col-10">
+                                <p>
+                                    Add this service booking link on your website and social media pages to accept bookings.
+                                </p>
+                            </div>
+                            <div class="col-12 mb-2">
+                                <!-- <mat-form-field class=" bottom-border-field "> -->
+                                <input [value]="frontBookingUrl" class="form-control form-control-transparent border pl-2" matInput placeholder="https://app.schedulic.com/book/service" readonly>
+                                <!-- </mat-form-field> -->
+                            </div>
+
+                            <a mat-button [href]="frontBookingUrl" target="_blank" class="btn service-booking-link-active ml-3 m-2 pr-3"><i
+                                    class="fa fa-external-link mr-2"></i>Test link</a>
+                            <button mat-button (click)="fnShare('facebook');" class="btn service-booking-link m-2 pr-3"><i class="fa fa-facebook mr-2"></i>Share
+                                It</button>
+                            <button mat-button (click)="fnShare('twitter');" class="btn service-booking-link m-2 pr-3"><i class="fa fa-twitter mr-2"></i>Tweet
+                                It</button>
+                        </div>
+                    </div>
+                </mat-card>
+
+
+                <mat-card class="main-form-setting-content service-boking-text-wrap">
+
+                    <div class="container p-3 bg-wrap rounded">
+                        <div class="row">
+                            <div class="col-6 ">
+                                <h5>HTML Buttons</h5>
+                            </div>
+                            <div class="col-12">
+                                <p>Add different colored “Book now” HTML buttons on your website. You can copy the code and add it to your blog and website.</p>
+                            </div>
+
+                            <div class="col-12 html-sample-btns">
+                                <div class="row html-btn-title">
+                                    <div class="col-4 py-3 pl-5">
+                                        Sample
+                                    </div>
+                                    <div class="col-8 py-3 ">
+                                        Code to Copy
+                                    </div>
+                                </div>
+
+                                <div class="row pt-2">
+                                    <div class="col-4 pt-4 pb-1 pl-5">
+                                        <a class="btn-color-dummy cursor-default">Book Now</a>
+                                    </div>
+                                    <div class="col-8 pt-0 pb-1 pr-5">
+
+                                        <input value="<a style='color: #00a89b;' href='{{frontBookingUrl}}'>BOOK NOW</a>" class="form-control form-control-transparent border pl-2" matInput placeholder="https://app.schedulic.com/book/service" readonly>
+
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-4 pt-1 pl-5 d-flex align-items-center">
+                                        <button class="btn btn-color-one cursor-default">BOOK NOW</button>
+                                    </div>
+                                    <div class="col-8 pt-0 pr-5">
+
+                                        <textarea value="<a style='background-color: #003cff;color: #fff;display: inline-block;padding: 10px 15px;text-decoration: none;border-radius: 5px;' href='{{frontBookingUrl}}'>BOOK NOW</a>" class="form-control form-control-transparent border pl-2" matInput
+                                            placeholder="{{frontBookingUrl}}" readonly></textarea>
+
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-4 pt-1 pl-5 d-flex align-items-center">
+                                        <button class="btn btn-color-two cursor-default">BOOK NOW</button>
+                                    </div>
+                                    <div class="col-8 pt-0 pr-5">
+
+                                        <textarea value="<a style='background-color: #008aff;color: #fff;display: inline-block;padding: 10px 15px;text-decoration: none;border-radius: 5px;' href='{{frontBookingUrl}}'>BOOK NOW</a>" class="form-control form-control-transparent border pl-2" matInput
+                                            placeholder="https://app.schedulic.com/book/service" readonly></textarea>
+
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-4 pt-1 pl-5 d-flex align-items-center">
+                                        <button class="btn btn-color-three cursor-default">BOOK NOW</button>
+                                    </div>
+                                    <div class="col-8 pt-0 pr-5">
+
+                                        <textarea value="<a style='background-color: #009315;color: #fff;display: inline-block;padding: 10px 15px;text-decoration: none;border-radius: 5px;' href='{{frontBookingUrl}}'>BOOK NOW</a>" class="form-control form-control-transparent border pl-2" matInput
+                                            placeholder="https://app.schedulic.com/book/service" readonly></textarea>
+
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-4 pt-1 pl-5 d-flex align-items-center">
+                                        <button class="btn btn-color-four cursor-default">BOOK NOW</button>
+                                    </div>
+                                    <div class="col-8 pt-0 pr-5">
+
+                                        <textarea value="<a style='background-color: #ffa800;color: #fff;display: inline-block;padding: 10px 15px;text-decoration: none;border-radius: 5px;' href='{{frontBookingUrl}}'>BOOK NOW</a>" class="form-control form-control-transparent border pl-2" matInput
+                                            placeholder="https://app.schedulic.com/book/service" readonly></textarea>
+
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-4 pt-1 pl-5 d-flex align-items-center">
+                                        <button class="btn btn-color-five cursor-default">BOOK NOW</button>
+                                    </div>
+                                    <div class="col-8 pt-0 pr-5">
+
+                                        <textarea value="<a style='background-color: #ff008a;color: #fff;display: inline-block;padding: 10px 15px;text-decoration: none;border-radius: 5px;' href='{{frontBookingUrl}}'>BOOK NOW</a>" class="form-control form-control-transparent border pl-2" matInput
+                                            placeholder="https://app.schedulic.com/book/service" readonly></textarea>
+
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-4 pt-1 pl-5 d-flex align-items-center">
+                                        <button class="btn btn-color-six cursor-default">BOOK NOW</button>
+                                    </div>
+                                    <div class="col-8 pt-0 pr-5">
+
+                                        <textarea value="<a style='background-color: #8a00ff;color: #fff;display: inline-block;padding: 10px 15px;text-decoration: none;border-radius: 5px;' href='{{frontBookingUrl}}'>BOOK NOW</a>" class="form-control form-control-transparent border pl-2" matInput
+                                            placeholder="https://app.schedulic.com/book/service" readonly></textarea>
+
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-4 pt-1 pl-5 d-flex align-items-center">
+                                        <button class="btn btn-color-seven cursor-default">BOOK NOW</button>
+                                    </div>
+                                    <div class="col-8 pt-0 pr-5">
+
+                                        <textarea value="<a style='background-color: #ff0000;color: #fff;display: inline-block;padding: 10px 15px;text-decoration: none;border-radius: 5px;' href='{{frontBookingUrl}}'>BOOK NOW</a>" class="form-control form-control-transparent border pl-2" matInput
+                                            placeholder="https://app.schedulic.com/book/service" readonly></textarea>
+
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-4 pt-1 pl-5 d-flex align-items-center">
+                                        <button class="btn btn-color-eight cursor-default">BOOK NOW</button>
+                                    </div>
+                                    <div class="col-8 pt-0 pr-5">
+
+                                        <textarea value="<a style='background-color: #000000;color: #fff;display: inline-block;padding: 10px 15px;text-decoration: none;border-radius: 5px;' href='{{frontBookingUrl}}'>BOOK NOW</a>" class="form-control form-control-transparent border pl-2" matInput
+                                            placeholder="https://app.schedulic.com/book/service" readonly></textarea>
+
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-4 pt-1 pl-5 d-flex align-items-center">
+                                        <button class="btn btn-color-nine cursor-default">BOOK NOW</button>
+                                    </div>
+                                    <div class="col-8 pt-0 pr-5">
+
+                                        <textarea value="<a style='background-color: #666666;color: #fff;display: inline-block;padding: 10px 15px;text-decoration: none;border-radius: 5px;' href='{{frontBookingUrl}}'>BOOK NOW</a>" class="form-control form-control-transparent border pl-2" matInput
+                                            placeholder="https://app.schedulic.com/book/service" readonly></textarea>
+
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-4 pt-1 pl-5 d-flex align-items-center">
+                                        <button class="btn btn-color-ten cursor-default">BOOK NOW</button>
+                                    </div>
+                                    <div class="col-8 pt-0 pr-5">
+
+                                        <textarea value="<a style='background-color: #fdfdfd;border: 1px solid #b5b5b5;color: #000;display: inline-block;padding: 10px 15px;text-decoration: none;border-radius: 5px;' href='{{frontBookingUrl}}'>BOOK NOW</a>" class="form-control form-control-transparent border pl-2"
+                                            matInput placeholder="https://app.schedulic.com/book/service" readonly></textarea>
+
+                                    </div>
+                                </div>
+                                <hr>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </mat-card>
+
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</mat-drawer-content>

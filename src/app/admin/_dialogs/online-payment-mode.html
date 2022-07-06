@@ -1,0 +1,34 @@
+<div class="modal-dialog modal-notify modal-info" role="document">
+    <div class="modal-content">
+        <div class="modal-header modal-bcolor-primary">
+            <p class="heading lead mb-0 interrupted-content">Payment Mode</p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onNoClick()">
+        <span aria-hidden="true" class="white-text">&times;</span>
+      </button>
+        </div>
+        <div class="modal-body ">
+            <div class="payment-module-img">
+                <img src="/assets/img/paymentmoduleimg.png" class="paymentmodeimg">
+            </div>
+            <div>
+                <mat-radio-group class="d-flex justify-content-center my-4">
+                    <mat-radio-button class="mb-0" value="pay2" (change)="fnPaymentMethod('Card')">Card</mat-radio-button>
+                    <mat-radio-button class="mb-0" value="pay1" (change)="fnPaymentMethod('Cash')">Cash</mat-radio-button>
+                </mat-radio-group>
+
+            </div>
+            <div class="col-12 common-input" *ngIf="payment_method=='Card'">
+                <div class="form-group">
+                    <mat-select class="form-control" placeholder="Select Card Option" [(ngModel)]="card_option" name="card_option">
+                        <mat-option value="swipe_card">Swipe Through Machine</mat-option>
+                        <mat-option value="send_link">Send Link To Customer</mat-option>
+                    </mat-select>
+                </div>
+            </div>
+            <div class="payment-action-btn">
+                <button mat-button class="sc-grey-btn mr-2" (click)="onNoClick()">Cancel</button>
+                <button mat-button class="sc-pink-btn" (click)="Confirm()">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>

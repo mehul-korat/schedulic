@@ -1,0 +1,87 @@
+#booking-rules {
+    // p{
+    //     color: #a0a0a0;
+    // }
+    .bottom-line {
+        width: 100%;
+    }
+    .matcard-space {
+        padding: 27px 30px!important;
+        box-shadow: unset!important;
+        background-color: #eaf7f6!important;
+        border-radius: 5px;
+    }
+    .custom-matcard-space{
+        h6{
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+        p{
+            font-size: 14px;
+            color: #565657;
+            font-weight: 400;
+            margin-bottom: 0px;
+        }
+        .label-wrap{
+            font-size: 14px;
+        }
+    }
+    // #1173f4
+    .example-full-width {
+        width: 66%;
+    }
+    .staff-reset-btn {
+        width: 120px;
+        height: 37px;
+        background-color: #f04589;
+        color: #fff;
+        margin-right: 15px;
+    }
+    .cancel-btn{
+        width: 120px;
+        height: 37px;
+        background-color: #a1a1a1;
+        color: #fff;
+        border-radius: 3px;
+    }
+}
+.custom-booking-rules-wrap{
+    h5{
+        margin-top: 25px;
+        margin-bottom: 4px;
+    }
+    p{
+        margin-bottom: 25px;
+        color: #565657;
+        font-weight: 400;
+    }
+    .custom-mat-card-bg{
+        background-color: unset!important;
+        box-shadow: unset!important;
+        padding: 0;
+        margin-top: 10px;
+        .bg-wrap{
+            background-color: #eaf7f6;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            padding: 27px 30px!important;
+            align-items: center;
+        }
+        h6{
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+        p{
+            font-size: 14px;
+            color: #565657;
+            font-weight: 400;
+            margin-bottom: 0px;
+        }
+
+    }
+}
+.main-card-container {
+    padding: 0 30px;
+    background-color: unset!important;
+    box-shadow: unset!important;
+}
